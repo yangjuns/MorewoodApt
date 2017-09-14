@@ -2,8 +2,6 @@ import autobind from "autobind-decorator";
 import $ from "jquery";
 import React from "react";
 
-import { PHP_PATH } from "../data";
-
 const updateInterval = 5000;
 
 const Person = {
@@ -80,7 +78,7 @@ export default class App extends React.Component {
             dataType: "text",
             method: "POST",
             success: this._handleGetSuccess,
-            url: `${PHP_PATH}/getMsg.php`,
+            url: `../php/getMsg.php`,
         });
     }
 
@@ -97,7 +95,7 @@ export default class App extends React.Component {
             dataType: "text",
             method: "POST",
             success: this._handlePutSuccess,
-            url: `${PHP_PATH}putMsg.php`,
+            url: `../php/putMsg.php`,
         });
     }
 
