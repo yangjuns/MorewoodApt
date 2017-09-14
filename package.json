@@ -1,11 +1,11 @@
 {
-  "name": "mysite",
+  "name": "morewood",
   "version": "1.0.0",
-  "description": "My personal website",
+  "description": "333 Morewood Ave Apt 5",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/hlycharles/MySite.git"
+    "url": "https://github.com/yangjuns/MorewoodApt.git"
   },
   "keywords": [
     "site"
@@ -19,7 +19,7 @@
     "lint-style": "stylelint 'src/**/*.scss'",
     "test": "test"
   },
-  "author": "Luyao Hou",
+  "author": "Yangjun Shen, Luyao Hou",
   "license": "ISC",
   "dependencies": {
     "autobind-decorator": "^1.4.1",
