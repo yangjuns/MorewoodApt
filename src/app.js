@@ -40,6 +40,7 @@ export default class App extends React.Component {
     render() {
         return (
             <div>
+                <h4>Morewoodie</h4>
                 {this.state.msgs.map(this._displayMsg)}
                 <input type="text" value={this.state.usrMsg} onChange={this._handleChange}/>
                 <button onClick={this._putData}>Send Message</button>
