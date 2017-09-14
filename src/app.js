@@ -5,10 +5,12 @@ import React from "react";
 const updateInterval = 5000;
 
 const Person = {
-    ZACH: {id: 4, name: "LYB"},
+    ZACH: {id: 6, name: "LYB"},
     LUYAO: {id: 5, name: "Luyao"},
-    YANG: {id: 6, name: "Yangjun"},
+    YANG: {id: 4, name: "Yangjun"},
 };
+
+import "./app.css";
 
 export default class App extends React.Component {
 
