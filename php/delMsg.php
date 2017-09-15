@@ -1,13 +1,21 @@
 <?php
-
+// arguments
 $id = $_POST["commentid"];
 
+// db parameters
+$db_server="yangjuns.info";
+$db_user="root";
+$db_password="qweasdzxc";
 $dbname = "morewoodapt";
 //$dbname = "morewoodapt_test";
 
-$conn = mysqli_connect("yangjuns.info", "root", "qweasdzxc", $dbname);
-mysqli_query($conn, "SET NAMES utf8;");
+$conn = new mysqli($db_server, $db_user, $db_password, $dbname);
+if($conn->connect_errno > 0){
+    die('Unable to connect to database [' . $db->connect_error . ']');
+}
+$conn->query("SET NAMES utf8;");
+
 $query = "UPDATE comments SET active = 0 WHERE commentid = $id";
-$result = mysqli_query($conn, $query);
-mysqli_close($conn);
+$conn->query($query);
+$conn->close();
 ?>

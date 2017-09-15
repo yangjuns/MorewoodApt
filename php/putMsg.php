@@ -1,15 +1,26 @@
 <?php
 
+// arguments
 $userId = $_POST["person"];
 $msg = $_POST["msg"];
+
+// db parameters
+$db_server="yangjuns.info";
+$db_user="root";
+$db_password="qweasdzxc";
 $dbname = "morewoodapt";
 //$dbname = "morewoodapt_test";
 
-$conn = mysqli_connect("yangjuns.info", "root", "qweasdzxc", $dbname);
-mysqli_query($conn, "SET NAMES utf8;");
-$query = "INSERT INTO comments (userid, comments, active, time) VALUES ($userId, '$msg' , 1, NOW())";
-mysqli_query($conn, $query);
+$conn = new mysqli($db_server, $db_user, $db_password, $dbname);
+if($conn->connect_errno > 0){
+    die('Unable to connect to database [' . $db->connect_error . ']');
+}
+$conn->query("SET NAMES utf8;");
+// prepare and bind
+$stmt = $conn->prepare("INSERT INTO comments (userid, comments) VALUES (?, ?)");
+$stmt->bind_param("is", $userId, $msg);
 
-mysqli_close($conn);
-
+// set parameters and execute
+$stmt->execute();
+$conn->close();
 ?>
