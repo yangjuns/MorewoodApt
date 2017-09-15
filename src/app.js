@@ -47,7 +47,7 @@ export default class App extends React.Component {
         return (
             <div className="app-container">
                 <div className="header-container">
-                    <h4>Morewoodie</h4>
+                    <h2>Morewoodie</h2>
                 </div>
                 {this.state.msgs.map(this._displayMsg)}
                 <InputBox
