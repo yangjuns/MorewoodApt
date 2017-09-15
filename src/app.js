@@ -2,15 +2,12 @@ import autobind from "autobind-decorator";
 import $ from "jquery";
 import React from "react";
 
+import { getCookie, setCookie } from "./lib/cookie";
 import Comment from "./screenComponents/comment";
+import InputBox, { Person, Persons } from "./screenComponents/inputBox";
 
 const updateInterval = 5000;
-
-const Person = {
-    ZACH: {id: 6, name: "LYB"},
-    LUYAO: {id: 5, name: "Luyao"},
-    YANG: {id: 4, name: "Yangjun"},
-};
+const cookiePersonKey = "person";
 
 import "./app.css";
 
@@ -21,7 +18,6 @@ export default class App extends React.Component {
         this.state = {
             msgs: [],
             person: Person.ZACH,
-            persons: [Person.YANG, Person.LUYAO, Person.ZACH],
             timer: null,
             usrMsg: "",
         }
@@ -31,6 +27,14 @@ export default class App extends React.Component {
         this._getData();
         const timer = setInterval(this._getData, updateInterval);
         this.setState({ timer });
+        const personName = getCookie(cookiePersonKey);
+        for (const person of Persons) {
+            if (person.name === personName) {
+                this.setState({ person });
+                return;
+            }
+        }
+        this.state.setCookie(cookiePersonKey, this.state.person.name);
     }
 
     componentWillUnmount() {
@@ -41,26 +45,18 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="app-container">
                 <div className="header-container">
                     <h4>Morewoodie</h4>
                 </div>
                 {this.state.msgs.map(this._displayMsg)}
-                <input type="text" value={this.state.usrMsg} onChange={this._handleChange}/>
-                <button onClick={this._putData}>Send Message</button>
-                <br />
-                {
-                    this.state.persons.map((person, index) =>
-                        <label key={index}>
-                            <input
-                                type="radio"
-                                checked={this.state.person === person}
-                                onChange={this._updatePerson(person)}
-                            />
-                            {person.name}
-                        </label>,
-                    )
-                }
+                <InputBox
+                    usrMsg={this.state.usrMsg}
+                    person={this.state.person}
+                    onPersonChange={this._handlePersonChange}
+                    onInputChange={this._handleInputChange}
+                    onSubmit={this._putData}
+                />
             </div>
         );
     }
@@ -130,11 +126,6 @@ export default class App extends React.Component {
     }
 
     @autobind
-    _handleChange(event) {
-        this.setState({ usrMsg: event.target.value });
-    }
-
-    @autobind
     _handleMsgDelete(id) {
         return () => this._deleteMsg(id);
     }
@@ -144,6 +135,17 @@ export default class App extends React.Component {
         return (
             <Comment key={index} msg={msg} onDelete={this._handleMsgDelete(msg.commentid)}/>
         );
+    }
+
+    @autobind
+    _handleInputChange(usrMsg) {
+        this.setState({ usrMsg });
+    }
+
+    @autobind
+    _handlePersonChange(person) {
+        this.setState({ person });
+        setCookie(cookiePersonKey, person.name);
     }
 
 }
