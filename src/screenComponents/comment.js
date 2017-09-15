@@ -7,6 +7,7 @@ export default function Comment(props) {
     return (
         <div>
             <p>{`(${msg.time}) ${msg.firstname}: ${msg.comments}`}</p>
+            <button onClick={props.onDelete}>Remove</button>
         </div>
     );
 }

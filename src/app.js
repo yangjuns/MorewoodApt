@@ -42,7 +42,9 @@ export default class App extends React.Component {
     render() {
         return (
             <div>
-                <h4>Morewoodie</h4>
+                <div className="header-container">
+                    <h4>Morewoodie</h4>
+                </div>
                 {this.state.msgs.map(this._displayMsg)}
                 <input type="text" value={this.state.usrMsg} onChange={this._handleChange}/>
                 <button onClick={this._putData}>Send Message</button>
@@ -76,7 +78,6 @@ export default class App extends React.Component {
     _getData() {
         $.ajax({
             data: {
-                key: "value",
                 limit: 20,
             },
             dataType: "text",
@@ -104,7 +105,21 @@ export default class App extends React.Component {
     }
 
     @autobind
+    _deleteMsg(id) {
+        $.ajax({
+            data: {
+                commentid: id,
+            },
+            dataType: "text",
+            method: "POST",
+            success: this._getData,
+            url: `../php/delMsg.php`,
+        });
+    }
+
+    @autobind
     _handleGetSuccess(data) {
+        console.log(data);
         const msgs = JSON.parse(data);
         this.setState({ msgs });
     }
@@ -121,9 +136,14 @@ export default class App extends React.Component {
     }
 
     @autobind
+    _handleMsgDelete(id) {
+        return () => this._deleteMsg(id);
+    }
+
+    @autobind
     _displayMsg(msg, index) {
         return (
-            <Comment key={index} msg={msg} />
+            <Comment key={index} msg={msg} onDelete={this._handleMsgDelete(msg.commentid)}/>
         );
     }
 
