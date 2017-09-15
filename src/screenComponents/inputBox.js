@@ -15,7 +15,7 @@ export default class InputBox extends React.Component {
     render() {
         return (
             <div className="row">
-                <div className="col-lg-6">
+                <div className="col-lg-12">
                     <form onSubmit={this._handleSubmit}>
                         <div className="input-group">
                             <div className="input-group-btn">
@@ -37,10 +37,6 @@ export default class InputBox extends React.Component {
                 </div>
             </div>
         );
-    }
-
-    _getUserId() {
-        return this.state.person.id;
     }
 
     @autobind

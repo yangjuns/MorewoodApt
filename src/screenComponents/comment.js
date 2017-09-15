@@ -1,6 +1,7 @@
 import React from "react";
 
 import "./comment.css";
+import { Person } from "./inputBox";
 
 export default function Comment(props) {
 
@@ -8,13 +9,13 @@ export default function Comment(props) {
 
     var alertClass = "";
     switch (msg.firstname) {
-    case "Luyao":
+    case Person.LUYAO.name:
         alertClass = "alert-info";
         break;
-    case "Yangjun":
+    case Person.YANG.name:
         alertClass = "alert-success";
         break;
-    case "LYB":
+    case Person.ZACH.name:
         alertClass = "alert-warning";
         break;
     }
