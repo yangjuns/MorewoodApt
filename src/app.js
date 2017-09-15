@@ -46,9 +46,6 @@ export default class App extends React.Component {
     render() {
         return (
             <div className="app-container">
-                <div className="header-container">
-                    <h2>Morewoodie</h2>
-                </div>
                 {this.state.msgs.map(this._displayMsg)}
                 <InputBox
                     usrMsg={this.state.usrMsg}

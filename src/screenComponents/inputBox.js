@@ -14,23 +14,28 @@ export default class InputBox extends React.Component {
 
     render() {
         return (
-            <form className="input-form" onSubmit={this._handleSubmit}>
-                <input className="input-box" type="text" value={this.props.usrMsg} onChange={this._handleInputChange}/>
-                <button type="submit" className="input-submit">Send Message</button>
-                <br />
-                {
-                    Persons.map((person, index) =>
-                        <label key={index}>
-                            <input
-                                type="radio"
-                                checked={this.props.person === person}
-                                onChange={this._handlePersonChange(person)}
-                            />
-                            {person.name}
-                        </label>,
-                    )
-                }
-            </form>
+            <div className="row">
+                <div className="col-lg-6">
+                    <form onSubmit={this._handleSubmit}>
+                        <div className="input-group">
+                            <div className="input-group-btn">
+                                <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{this.props.person.name}<span className="caret"></span></button>
+                                <ul className="dropdown-menu">
+                                    {
+                                        Persons.map((person, index) =>
+                                            <li key={index}><a onClick={this._handlePersonChange(person)}>{person.name}</a></li>,
+                                        )
+                                    }
+                                </ul>
+                            </div>
+                            <input type="text" className="form-control" aria-label="..." value={this.props.usrMsg} onChange={this._handleInputChange} />
+                            <span className="input-group-btn">
+                                <button className="btn btn-default" type="submit">Send</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
         );
     }
 
