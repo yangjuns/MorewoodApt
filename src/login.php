@@ -53,8 +53,6 @@
       if($result->num_rows == 0){
         $msg = 'Wrong username or password';
       }else{
-        $_SESSION['logged_in'] = true;
-        $_SESSION['username'] = $_POST['username'];
         header("Location: index.html");
       }
       $db->close();
@@ -78,6 +76,11 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+      function myFunction(){
+        window.location.href = "index.html";
+      }
+    </script>
 </head>
 <body>
     <nav class="navbar navbar-inverse"  style="border-radius: 0px;">
@@ -96,7 +99,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a>Home <span class="sr-only">(current)</span></a></li>
+                    <li class="active" onClick = "myFunction();"><a>Home <span class="sr-only">(current)</span></a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
