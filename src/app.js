@@ -34,7 +34,7 @@ export default class App extends React.Component {
                 return;
             }
         }
-        this.state.setCookie(cookiePersonKey, this.state.person.name);
+        setCookie(cookiePersonKey, this.state.person.name);
     }
 
     componentWillUnmount() {
