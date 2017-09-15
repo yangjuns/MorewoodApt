@@ -2,6 +2,8 @@ import autobind from "autobind-decorator";
 import $ from "jquery";
 import React from "react";
 
+import Comment from "./screenComponents/comment";
+
 const updateInterval = 5000;
 
 const Person = {
@@ -121,7 +123,7 @@ export default class App extends React.Component {
     @autobind
     _displayMsg(msg, index) {
         return (
-            <p key={index}>{`(${msg.time}) ${msg.firstname}: ${msg.comments}`}</p>
+            <Comment key={index} msg={msg} />
         );
     }
 
