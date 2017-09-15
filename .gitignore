@@ -3,3 +3,5 @@ node_modules/
 
 #build products
 build/
+
+deploy.sh
