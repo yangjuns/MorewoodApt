@@ -21,7 +21,7 @@ $msgs = array();
 date_default_timezone_set("US/Eastern");
 while ($row = $result->fetch_assoc()) {
     $fetchedTime = $row["time"];
-    $timeStr = date("l dS F Y h:i:s A", strtotime($fetchedTime));
+    $timeStr = date("m/d/y D H:i:s", strtotime($fetchedTime));
     $row["time"] = $timeStr;
     array_push($msgs, $row);
 }
