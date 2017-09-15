@@ -1,7 +1,7 @@
 <?php
-
+session_start();
 // arguments
-$userId = $_POST["person"];
+$userId = $_SESSION["userid"];
 $msg = $_POST["msg"];
 
 // db parameters

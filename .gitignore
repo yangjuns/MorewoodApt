@@ -4,4 +4,5 @@ node_modules/
 #build products
 build/
 
+.idea/
 deploy.sh

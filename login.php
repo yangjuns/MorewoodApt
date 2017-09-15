@@ -1,38 +1,7 @@
 <?php
-  // session_start();
-  // //echo $$_POST['username'];
-  // //echo $_POST['password'];
-  // if (isset($_POST['username']) && isset($_POST['password'])){
-    // $db_server = 'yangjuns.info';
-    // $db_user = 'root';
-    // $db_password = 'qweasdzxc';
-    // $username = $_POST['username'];
-    // $password = $_POST['password'];
-  //   $db = new mysqli($db_server, $db_user, $db_password, 'morewoodapt');
-  //   if($db->connect_errno > 0){
-  //       die('Unable to connect to database [' . $db->connect_error . ']');
-  //   }
-  //   $sql = "SELECT * FROM users WHERE firstname = \"$username\" AND password = \"$password\"";
-  //
-  //   if(!$result = $db->query($sql)){
-  //       die('There was an error running the query [' . $db->error . ']');
-  //   };
-  //
-  //   if($result->num_rows == 0){
-  //     header("Location: login.php");
-  //   }else{
-  //     $_SESSION['logged_in'] = true;
-  //     $_SESSION['username'] = $_POST['username'];
-  //     header("Location: index.html");
-  //   }
-  // }
-?>
-
-<?php
     $msg = '';
     session_start();
-    $_SESSION['logged_in'] = true;
-    $_SESSION['username'] = $_POST['username'];
+
     if (!empty($_POST['username']) && !empty($_POST['password'])) {
       $username = $_POST['username'];
       $password = $_POST['password'];
@@ -44,7 +13,7 @@
       if($db->connect_errno > 0){
           die('Unable to connect to database [' . $db->connect_error . ']');
       }
-      $sql = "SELECT * FROM users WHERE firstname = \"$username\" AND password = \"$password\"";
+      $sql = "SELECT userid FROM users WHERE firstname = \"$username\" AND password = \"$password\"";
 
       if(!$result = $db->query($sql)){
           die('There was an error running the query [' . $db->error . ']');
@@ -53,7 +22,10 @@
       if($result->num_rows == 0){
         $msg = 'Wrong username or password';
       }else{
-        header("Location: index.html");
+        $userid = $result->fetch_assoc()["userid"];
+        $_SESSION['userid'] = $userid;
+        $_SESSION['username'] = $_POST['username'];
+        header("Location: index.php");
       }
       $db->close();
     }
@@ -68,7 +40,7 @@
     <title>333 Morewood Apt 5</title>
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -78,32 +50,12 @@
     <![endif]-->
     <script type="text/javascript">
       function myFunction(){
-        window.location.href = "index.html";
+        window.location.href = "index.php";
       }
     </script>
 </head>
 <body>
-    <nav class="navbar navbar-inverse"  style="border-radius: 0px;">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" style="color: white;">Morewoodie</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="active" onClick = "myFunction();"><a>Home <span class="sr-only">(current)</span></a></li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
+    <?php include "header.php" ?>
 
     <form class="" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);
             ?>" method="post" style="text-align:center;">
@@ -125,7 +77,7 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
 
 </body>
 </html>
