@@ -1,0 +1,13 @@
+.comment-container {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+p.comment-time,
+p.comment-name {
+    font-weight: lighter;
+}
+
+.comment-del-btn {
+    margin-bottom: 20px;
+}
