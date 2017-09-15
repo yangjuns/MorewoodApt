@@ -119,7 +119,6 @@ export default class App extends React.Component {
 
     @autobind
     _handleGetSuccess(data) {
-        console.log(data);
         const msgs = JSON.parse(data);
         this.setState({ msgs });
     }
