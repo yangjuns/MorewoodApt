@@ -47,7 +47,13 @@ function blockHTML($msgs){
         }
         echo <<<HTML
     <div class="alert {$color} alert-dismissible" role="alert">
-        <button type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></button>
+HTML;
+        if(!empty($_SESSION["username"]) && ($_SESSION["username"] == $row["firstname"])){
+            echo <<<HTML
+            <button type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></button>
+HTML;
+        }
+        echo <<<HTML
         <button class="close" style="font-size: 10px; margin-right: 10px; padding-top: 7px;">{$row["time"]}</button>
         <strong>{$row["firstname"]}: </strong>
         {$row["comments"]}
