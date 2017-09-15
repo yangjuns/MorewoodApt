@@ -14,9 +14,9 @@ export default class InputBox extends React.Component {
 
     render() {
         return (
-            <div className="input-panel">
+            <form className="input-form" onSubmit={this._handleSubmit}>
                 <input className="input-box" type="text" value={this.props.usrMsg} onChange={this._handleInputChange}/>
-                <button className="input-submit" onClick={this._handleSubmit}>Send Message</button>
+                <button type="submit" className="input-submit">Send Message</button>
                 <br />
                 {
                     Persons.map((person, index) =>
@@ -30,7 +30,7 @@ export default class InputBox extends React.Component {
                         </label>,
                     )
                 }
-            </div>
+            </form>
         );
     }
 
@@ -49,7 +49,8 @@ export default class InputBox extends React.Component {
     }
 
     @autobind
-    _handleSubmit() {
+    _handleSubmit(event) {
+        event.preventDefault();
         this.props.onSubmit();
     }
 }
