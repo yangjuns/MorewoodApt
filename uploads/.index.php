@@ -183,7 +183,7 @@
 if(!empty($_SESSION["username"])){
     echo <<<HTML
         <input type="file" name="fileToUpload" id="fileToUpload">
-        <input type="button" value="Upload Image" id="upload-btn" name="submit">
+        <input type="button" value="Upload Image" id="upload-btn" name="submit">e
 HTML;
 }
 ?>
