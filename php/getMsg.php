@@ -1,4 +1,5 @@
 <?php
+session_start();
 // arguments
 $msgLimit = 20;
 
@@ -50,7 +51,7 @@ function blockHTML($msgs){
 HTML;
         if(!empty($_SESSION["username"]) && ($_SESSION["username"] == $row["firstname"])){
             echo <<<HTML
-            <button type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></button>
+            <button onclick="delMsg({$row['commentid']});" type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></button>
 HTML;
         }
         echo <<<HTML

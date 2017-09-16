@@ -1,5 +1,4 @@
 var info = document.getElementById( 'app' );
-console.log("hello world");
 
 function AjaxCaller(){
     var xmlhttp=false;
@@ -19,7 +18,7 @@ function AjaxCaller(){
     return xmlhttp;
 }
 
-function callPage(url, div){
+function getMsg(url, div){
     ajax=AjaxCaller();
     ajax.open("GET", url, true);
     ajax.onreadystatechange=function(){
@@ -40,13 +39,12 @@ function sendMsg(){
         ajax=AjaxCaller();
         var data =
             "msg=" + encodeURIComponent(message);
-        console.log(data);
         ajax.open("POST", "../php/putMsg.php", true);
         ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         ajax.onreadystatechange=function(){
             if(ajax.readyState==4){
                 if(ajax.status==200){
-                    //do nothing
+                    getMsg("../php/getMsg.php", info);
                 }else{
                     //TODO: need to handle error
                 }
@@ -54,9 +52,31 @@ function sendMsg(){
         }
         ajax.send(data);
     }
-
 }
-var btn = document.getElementById("sendMsg");
-btn.onclick = sendMsg;
 
-setInterval("callPage(\"../php/getMsg.php\", info)", 5000);
+function delMsg(id){
+    ajax=AjaxCaller();
+    var data =
+        "commentid=" + encodeURIComponent(id);
+    ajax.open("POST", "../php/delMsg.php", true);
+    ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    ajax.onreadystatechange=function(){
+        if(ajax.readyState==4){
+            if(ajax.status==200){
+                getMsg("../php/getMsg.php", info);
+            }
+        }
+    }
+    ajax.send(data);
+}
+
+function handleInputSubmit(event) {
+    event.preventDefault();
+    sendMsg();
+}
+
+
+const inputForm = document.getElementById("input-form");
+inputForm.onsubmit = handleInputSubmit;
+
+setInterval("getMsg(\"../php/getMsg.php\", info)", 5000);

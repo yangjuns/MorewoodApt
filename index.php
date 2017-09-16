@@ -32,12 +32,14 @@
         <?php
         if(!empty($_SESSION["username"])){
             echo <<<HTML
-            <div class="input-group">
-                <input type="text" id="message" class="form-control" aria-label="...">
-                <div class="input-group-btn">
-                    <button class="btn btn-default" type="button" id="sendMsg"}>Send</button>
+            <form id="input-form" method="post">
+                <div class="input-group">
+                        <input type="text" id="message" class="form-control" aria-label="...">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit" id="sendMsg"}>Send</button>
+                        </div>
                 </div>
-            </div> 
+            </form>
 HTML;
         }
         ?>
