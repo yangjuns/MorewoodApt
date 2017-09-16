@@ -185,7 +185,7 @@ if(!empty($_SESSION["username"])){
     <form id= "upload-form" action="../php/upload.php"} method="post" enctype="multipart/form-data">
         Select file to upload:
         <input type="file" name="fileToUpload" id="fileToUpload">
-        <input type="submit" value="Upload Image" id="upload-btn" name="submit">
+        <input type="submit" value="Upload File" id="upload-btn" name="submit">
     </form>
 HTML;
 }

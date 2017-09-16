@@ -85,7 +85,6 @@ function sendMsg(){
             },
             url: "../php/putMsg.php",
             success: function(response) {
-                console.log(response);
                 getMsg("../php/getMsg.php", info);
             },
         });

@@ -25,4 +25,13 @@ $stmt->bind_param("is", $userId, $msg);
 $stmt->execute();
 $conn->close();
 
+if (sizeof($emails) > 0) {
+    $to = "hly.charles@gmail.com";
+    $subject = "My subject";
+    $txt = "Hello world!";
+    $headers = "From: lhou@andrew.cmu.edu" . "\r\n";
+
+    mail($to,$subject,$txt,$headers);
+}
+
 ?>
