@@ -16,37 +16,31 @@ function AjaxCaller(){
     return xmlhttp;
 }
 
-function UploadFile(file) {
-
-    var xhr = AjaxCaller();
-    if (xhr.upload && file.size <= 50000) {
-
-        // create progress bar
-        var o = $id("progress");
-        var progress = o.appendChild(document.createElement("p"));
-        progress.appendChild(document.createTextNode("upload " + file.name));
-        // progress bar
-        xhr.upload.addEventListener("progress", function(e) {
-            var pc = parseInt(100 - (e.loaded / e.total * 100));
-            var bar = document.getElementsByClassName("progress-bar").item(0);
-            console.log(bar);
-
-            progress.style.backgroundPosition = pc + "% 0";
-        }, false);
-        // file received/failed
-        xhr.onreadystatechange = function(e) {
-            if (xhr.readyState == 4) {
-                progress.className = (xhr.status == 200 ? "success" : "failure");
-            }
-        };
-        // start upload
-        xhr.open("POST", $id("upload").action, true);
-        xhr.setRequestHeader("X-FILENAME", file.name);
-        xhr.send(file);
-
+function UploadFile() {
+    if(file.files.length === 0){
+        return;
     }
+    var data = new FormData();
+    data.append('fileToUpload', file.files[0]);
+    bar.style.display="block";
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function(){
+        if(request.readyState == 4){
+            try {
+                window.location.reload();
+            } catch (e){
+                console.log(e);
+            }
+        }
+    };
+    request.upload.addEventListener('progress', function(e){
+        bar.style.width = Math.ceil(e.loaded/e.total) * 100 + '%';
+    }, false);
+    request.open('POST', "/php/upload.php");
+    request.send(data);
 }
 
 var btn = document.getElementById("upload-btn");
-var form = document.getElementById("upload-form");
-form.onsubmit = UploadFile;
+var file = document.getElementById("fileToUpload");
+var bar = document.getElementById("progress-bar");
+btn.addEventListener("click", UploadFile);

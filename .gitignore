@@ -6,4 +6,4 @@ build/
 test.php
 .idea/
 deploy.sh
-uploads/
+uploads/*

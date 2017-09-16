@@ -182,17 +182,17 @@
 <?php
 if(!empty($_SESSION["username"])){
     echo <<<HTML
-    <form id= "upload-form" action="../php/upload.php"} method="post" enctype="multipart/form-data">
-        Select file to upload:
         <input type="file" name="fileToUpload" id="fileToUpload">
-        <input type="submit" value="Upload Image" id="upload-btn" name="submit">
-    </form>
+        <input type="button" value="Upload Image" id="upload-btn" name="submit">
 HTML;
 }
 ?>
 
-<div class="progress">
-    <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+<div class="progress" style="display:none">
+    <div id = "progress-bar"
+         class="progress-bar progress-bar-info progress-bar-striped"
+         role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"
+         style="width: 0%">
         <span class="sr-only">20% Complete</span>
     </div>
 </div>

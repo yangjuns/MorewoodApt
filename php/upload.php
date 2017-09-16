@@ -21,7 +21,7 @@ if ($uploadOk == 0) {
 // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        header("Location:../uploads/.index.php");
+        header("Location: /uploads/.index.php");
     } else {
         echo "Sorry, there was an error uploading your file.";
     }
