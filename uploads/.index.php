@@ -161,20 +161,27 @@
 		}
 
 	// Output
-	 echo("
+    echo <<<HTML
 		<tr class='$class'>
 			<td><a href='./$namehref'$favicon class='name' download>$name</a></td>
 			<td><a href='./$namehref'>$extn</a></td>
 			<td sorttable_customkey='$sizekey'><a href='./$namehref'>$size</a></td>
-			<td sorttable_customkey='$timekey'><a href='./$namehref'
-			    >$modtime
-			    
-			    </a>
-			 <td><span class=\"glyphicon glyphicon-remove-circle\" aria-hidden=\"true\"
+			<td sorttable_customkey='$timekey'><a href='./$namehref'>$modtime</a></td>
+			<td>
+HTML;
+    if(!empty($_SESSION["username"])) {
+        echo <<<HTML
+        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"
 			        style='color: red;' onclick='DeleteFile(this);'
-			    ></span></td> 		    
-			</td>
-		</tr>");
+	    ></span>
+
+HTML;
+    }
+    echo <<<HTML
+
+            </td> 		    
+		</tr>
+HTML;
 	   }
 	}
 	?>
