@@ -1,16 +1,14 @@
 <?php
-    session_start();
+
     if(!empty($_SESSION["username"])){
         echo <<<HTML
         <div id="input-panel">
-            <div id="input-bar">
-                <form id="input-form" method="post">
-                    <div class="input-group">
-                            <input type="text" id="message" class="form-control" aria-label="...">
-                            <div class="input-group-btn">
-                                <button class="btn btn-default" type="submit" id="sendMsg"}>Send</button>
-                            </div>
-                    </div>
+            <div class="container input-subpanel">
+                <form id="input-form" class="row" method="post">
+                        <input type="text" id="message" class="col-xs-10" placeholder="Send a comment" autofocus>
+                        <div class="submit-btn-container col-xs-2">
+                            <button type="submit" id="sendMsg"}>Send</button>
+                        </div>
                 </form>
             </div>
         </div>
