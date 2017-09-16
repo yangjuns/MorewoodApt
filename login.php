@@ -35,7 +35,7 @@
 <html lang="en">
 
 <?php
-    $title = "333 Morewood Apt 5 - Login";
+    $_SESSION["title"] = "333 Morewood Apt 5 - Login";
     include "head.php";
 ?>
 

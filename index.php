@@ -10,7 +10,7 @@
 <body>
     <!--    include header file-->
     <?php
-        $currentPage = "HOME";
+        $_SESSION["currentPage"] = "HOME";
         include "header.php"
     ?>
 

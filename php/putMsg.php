@@ -3,6 +3,7 @@ session_start();
 // arguments
 $userId = $_SESSION["userid"];
 $msg = $_POST["msg"];
+$emails = $_POST["emails"];
 
 // db parameters
 $db_server="yangjuns.info";
@@ -23,4 +24,5 @@ $stmt->bind_param("is", $userId, $msg);
 // set parameters and execute
 $stmt->execute();
 $conn->close();
+
 ?>
