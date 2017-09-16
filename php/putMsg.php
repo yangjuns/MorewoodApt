@@ -6,7 +6,7 @@ $msg = $_POST["msg"];
 $emails = $_POST["emails"];
 
 // db parameters
-$db_server="yangjuns.info";
+$db_server="127.0.0.1";
 $db_user="root";
 $db_password="qweasdzxc";
 $dbname = "morewoodapt";
