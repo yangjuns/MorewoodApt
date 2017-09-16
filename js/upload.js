@@ -27,6 +27,7 @@ function UploadFile() {
     request.onreadystatechange = function(){
         if(request.readyState == 4){
             try {
+                //console.log(request.responseText);
                 window.location.reload();
             } catch (e){
                 console.log(e);
