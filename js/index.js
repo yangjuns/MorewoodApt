@@ -74,7 +74,7 @@ function findMentions(text) {
 
 function sendMsg(){
     const text = document.getElementById("message")
-    const message = text.value;
+    const message = text.value.trim();
     text.value = "";
     if(message!=""){
         $.ajax({
