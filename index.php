@@ -24,26 +24,12 @@
     <?php include "header.php"?>
 
     <!--    comments-->
-    <div id="app">
+    <div id="content-container">
         <?php include "php/getMsg.php"; ?>
     </div>
+
     <!--    Send Message-->
-    <div id="input-bar">
-        <?php
-        if(!empty($_SESSION["username"])){
-            echo <<<HTML
-            <form id="input-form" method="post">
-                <div class="input-group">
-                        <input type="text" id="message" class="form-control" aria-label="...">
-                        <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit" id="sendMsg"}>Send</button>
-                        </div>
-                </div>
-            </form>
-HTML;
-        }
-        ?>
-    </div>
+    <?php include "screenComponents/inputBox.php" ?>
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

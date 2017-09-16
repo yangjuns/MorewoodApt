@@ -41,36 +41,33 @@
 
     <!-- Bootstrap -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
+    <link href="css/index.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script type="text/javascript">
-      function myFunction(){
-        window.location.href = "index.php";
-      }
-    </script>
 </head>
 <body>
     <?php include "header.php" ?>
 
-    <form class="" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);
-            ?>" method="post" style="text-align:center;">
-      <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">username</span>
-        <input type="text" name="username" class="form-control" aria-describedby="basic-addon1">
-      </div>
-      <br>
-      <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">Password</span>
-        <input type="password" name="password" class="form-control" aria-describedby="basic-addon1">
-      </div>
-      <br>
-      <button type="submit" class="btn btn-success">Login</button>
-    </form>
+    <div id="content-container">
+      <form class="" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);
+              ?>" method="post" style="text-align:center;">
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">username</span>
+          <input type="text" name="username" class="form-control" aria-describedby="basic-addon1">
+        </div>
+        <br>
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">Password</span>
+          <input type="password" name="password" class="form-control" aria-describedby="basic-addon1">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-success">Login</button>
+      </form>
+    </div>
     <div >
       <?php echo $msg ?>
     </div>

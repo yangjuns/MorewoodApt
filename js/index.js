@@ -1,4 +1,4 @@
-var info = document.getElementById( 'app' );
+var info = document.getElementById( "content-container" );
 
 function AjaxCaller(){
     var xmlhttp=false;
@@ -77,6 +77,8 @@ function handleInputSubmit(event) {
 
 
 const inputForm = document.getElementById("input-form");
-inputForm.onsubmit = handleInputSubmit;
+if (inputForm) {
+    inputForm.onsubmit = handleInputSubmit;
+}
 
 setInterval("getMsg(\"../php/getMsg.php\", info)", 5000);
