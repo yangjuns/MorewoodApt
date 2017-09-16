@@ -4,7 +4,7 @@ session_start();
 $msgLimit = 20;
 
 // db parameters
-$db_server="127.0.0.1";
+$db_server="morewood.life";
 $db_user="root";
 $db_password="qweasdzxc";
 $dbname = "morewoodapt";
