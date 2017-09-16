@@ -8,13 +8,13 @@ if (!empty($_SESSION["username"])) {
         <ul class="dropdown-menu">
         <li><a href="#">About Me</a></li>
         <li role="separator" class="divider"></li>
-        <li><a href="logout.php">Logout</a></li>
+        <li><a href="/logout.php">Logout</a></li>
         </ul>
     </li>
 HTML;
 } else {
     $login = <<<HTML
-        <li><a href="login.php">Login</a></li>
+        <li><a href="/login.php">Login</a></li>
 HTML;
 }
 
