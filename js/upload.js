@@ -34,6 +34,8 @@ function UploadFile() {
         }
     };
     request.upload.addEventListener('progress', function(e){
+        console.log(e)
+        console.log(e.total)
         bar.style.width = Math.ceil(e.loaded/e.total) * 100 + '%';
     }, false);
     request.open('POST', "/php/upload.php");
