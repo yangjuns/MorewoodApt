@@ -1,5 +1,6 @@
 <?php
 
+$title = $_SESSION["title"];
 $webTitle = ($title) ? $title : "333 Morewood Apt 5";
 
 echo <<<HTML

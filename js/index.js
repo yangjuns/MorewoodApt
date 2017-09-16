@@ -77,22 +77,18 @@ function sendMsg(){
     const message = text.value;
     text.value = "";
     if(message!=""){
-        ajax=AjaxCaller();
-        var data =
-            "msg=" + encodeURIComponent(message);
-        data += "&emails=" + JSON.stringify(findMentions(message));
-        ajax.open("POST", "../php/putMsg.php", true);
-        ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        ajax.onreadystatechange=function(){
-            if(ajax.readyState==4){
-                if(ajax.status==200){
-                    getMsg("../php/getMsg.php", info);
-                }else{
-                    //TODO: need to handle error
-                }
-            }
-        }
-        ajax.send(data);
+        $.ajax({
+            type: "POST",
+            data: {
+                msg: message,
+                emails: findMentions(message),
+            },
+            url: "../php/putMsg.php",
+            success: function(response) {
+                console.log(response);
+                getMsg("../php/getMsg.php", info);
+            },
+        });
     }
 }
 

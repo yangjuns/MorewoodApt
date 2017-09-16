@@ -18,6 +18,7 @@ HTML;
 HTML;
 }
 
+$currentPage = $_SESSION["currentPage"];
 $homeClass = ($currentPage == "HOME") ? "active" : "";
 $fileClass = ($currentPage == "FILE") ? "active" : "";
 

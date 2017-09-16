@@ -25,7 +25,7 @@
 <body>
 <div id="container">
 	<?php
-	    $currentPage = "FILE";
+	    $_SESSION["currentPage"] = "FILE";
 		include "../header.php"
 	?>
 	<h1>Data Center</h1>
