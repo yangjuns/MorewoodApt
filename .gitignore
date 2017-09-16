@@ -3,7 +3,7 @@ node_modules/
 
 #build products
 build/
-
+test.php
 .idea/
 deploy.sh
 uploads/
