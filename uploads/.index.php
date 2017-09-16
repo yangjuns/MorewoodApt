@@ -183,12 +183,12 @@
 if(!empty($_SESSION["username"])){
     echo <<<HTML
         <input type="file" name="fileToUpload" id="fileToUpload">
-        <input type="button" value="Upload Image" id="upload-btn" name="submit">e
+        <input type="button" value="Upload Image" id="upload-btn" name="submit">
 HTML;
 }
 ?>
 
-<div class="progress" style="display:none">
+<div class="progress" id = "bar-box" style="display:none">
     <div id = "progress-bar"
          class="progress-bar progress-bar-info progress-bar-striped"
          role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"

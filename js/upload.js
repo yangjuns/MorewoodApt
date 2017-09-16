@@ -22,7 +22,7 @@ function UploadFile() {
     }
     var data = new FormData();
     data.append('fileToUpload', file.files[0]);
-    bar.style.display="block";
+    bar_box.style.display="block";
     var request = new XMLHttpRequest();
     request.onreadystatechange = function(){
         if(request.readyState == 4){
@@ -42,5 +42,6 @@ function UploadFile() {
 
 var btn = document.getElementById("upload-btn");
 var file = document.getElementById("fileToUpload");
+var bar_box = document.getElementById("bar-box");
 var bar = document.getElementById("progress-bar");
 btn.addEventListener("click", UploadFile);
