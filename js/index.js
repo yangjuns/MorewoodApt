@@ -1,5 +1,24 @@
 const info = document.getElementById( "content-container" );
 
+const Person = {
+    ZACH: {name: "LYB"},
+    LUYAO: {name: "Luyao"},
+    YANG: {name: "Yangjun"},
+};
+
+function isValidPerson(name) {
+    name = name.toLowerCase();
+    for (var key in Person) {
+        if (Person.hasOwnProperty(key)) {
+            if (name == Person[key].name.toLowerCase()) {
+                return Person[key].name;
+            }
+        }
+    }
+    return "";
+}
+
+
 function AjaxCaller(){
     var xmlhttp=false;
     try{
@@ -31,14 +50,37 @@ function getMsg(url, div){
     ajax.send(null);
 }
 
+function findMentions(text) {
+    const result = [];
+    var mentionIndex = text.indexOf('@');
+    while (mentionIndex >= 0) {
+        var endIndex = text.indexOf(" ", mentionIndex + 1);
+        if (endIndex < 0) {
+            endIndex = text.length;
+        }
+        var name = text.substring(mentionIndex + 1, endIndex);
+        name = isValidPerson(name);
+        if (name.length > 0) {
+            result.push(name);
+        }
+        if (endIndex < text.length) {
+            mentionIndex = text.indexOf('@', mentionIndex + 1);
+        } else {
+            break;
+        }
+    }
+    return result;
+}
+
 function sendMsg(){
-    var text = document.getElementById("message")
-    var message = text.value;
+    const text = document.getElementById("message")
+    const message = text.value;
     text.value = "";
     if(message!=""){
         ajax=AjaxCaller();
         var data =
             "msg=" + encodeURIComponent(message);
+        data += "&emails=" + JSON.stringify(findMentions(message));
         ajax.open("POST", "../php/putMsg.php", true);
         ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         ajax.onreadystatechange=function(){
