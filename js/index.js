@@ -1,4 +1,4 @@
-var info = document.getElementById( "content-container" );
+const info = document.getElementById( "content-container" );
 
 function AjaxCaller(){
     var xmlhttp=false;
@@ -79,6 +79,13 @@ function handleInputSubmit(event) {
 const inputForm = document.getElementById("input-form");
 if (inputForm) {
     inputForm.onsubmit = handleInputSubmit;
+}
+
+const inputPanel = document.getElementById("input-panel");
+if (inputPanel) {
+    const panelHeight = $(inputPanel).outerHeight();
+    const content = document.getElementById("content-container");
+    $(content).css("margin-bottom", panelHeight + 20);
 }
 
 setInterval("getMsg(\"../php/getMsg.php\", info)", 5000);
