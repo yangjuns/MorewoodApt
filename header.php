@@ -19,6 +19,7 @@ HTML;
 }
 
 $homeClass = ($currentPage == "HOME") ? "active" : "";
+$fileClass = ($currentPage == "FILE") ? "active" : "";
 
 echo <<<HTML
 <nav class="navbar navbar-inverse"  style="border-radius: 0px;">
@@ -37,8 +38,8 @@ echo <<<HTML
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class={$homeClass}><a href="index.php">Home<span class="sr-only">(current)</span></a></li>
-                <li class={$homeClass}><a href="uploads/.index.php">File<span class="sr-only">(current)</span></a></li>
+                <li class={$homeClass}><a href="/index.php">Home<span class="sr-only">(current)</span></a></li>
+                <li class={$fileClass}><a href="/uploads/.index.php">File<span class="sr-only">(current)</span></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {$login}

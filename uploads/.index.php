@@ -23,7 +23,10 @@
 
 <body>
 <div id="container">
-    <?php include "../header.php"?>
+	<?php
+	    $currentPage = "FILE";
+		include "../header.php"
+	?>
 	<h1>Data Center</h1>
 
 	<table class="sortable">
