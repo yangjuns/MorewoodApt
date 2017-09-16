@@ -40,6 +40,20 @@ function UploadFile() {
     request.send(data);
 }
 
+function DeleteFile(item){
+    //get the file
+    var filename = item.parentNode.parentNode.firstElementChild.firstElementChild.innerHTML;
+    console.log(filename);
+    $.ajax({
+        type: "POST",
+        data: {
+            msg: filename,
+        },success: function(response) {
+            window.location.reload();
+        },
+        url: "/php/deleteFile.php",
+    });
+}
 var btn = document.getElementById("upload-btn");
 var file = document.getElementById("fileToUpload");
 var bar_box = document.getElementById("bar-box");

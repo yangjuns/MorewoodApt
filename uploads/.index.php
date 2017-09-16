@@ -18,7 +18,8 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-   <link rel="stylesheet" href=".style.css">
+    <link rel="stylesheet" href=".style.css">
+    <link rel="stylesheet" href="/css/file.css">
    <script src=".sorttable.js"></script>
 </head>
 
@@ -36,6 +37,7 @@
 			<th>Type</th>
 			<th>Size</th>
 			<th>Date Modified</th>
+            <th></th>
 		</tr>
 	    </thead>
 	    <tbody><?php
@@ -164,7 +166,14 @@
 			<td><a href='./$namehref'$favicon class='name' download>$name</a></td>
 			<td><a href='./$namehref'>$extn</a></td>
 			<td sorttable_customkey='$sizekey'><a href='./$namehref'>$size</a></td>
-			<td sorttable_customkey='$timekey'><a href='./$namehref'>$modtime</a></td>
+			<td sorttable_customkey='$timekey'><a href='./$namehref'
+			    >$modtime
+			    
+			    </a>
+			 <td><span class=\"glyphicon glyphicon-remove-circle\" aria-hidden=\"true\"
+			        style='color: red;' onclick='DeleteFile(this);'
+			    ></span></td> 		    
+			</td>
 		</tr>");
 	   }
 	}

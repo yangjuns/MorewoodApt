@@ -1,0 +1,9 @@
+.glyphicon{
+    padding-right: 5%;
+    padding-top: 5%;
+    /*cursor: hand;*/
+    cursor:pointer;
+}
+.glyphicon-remove-circle:hover{
+    cursor:hand;
+}
