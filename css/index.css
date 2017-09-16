@@ -2,10 +2,3 @@
     padding-left: 5%;
     padding-right: 5%;
 }
-
-#input-panel {
-    position: fixed;
-    bottom: 0;
-    background-color: #ececec;
-    padding: 10px;
-}
