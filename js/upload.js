@@ -47,6 +47,7 @@ function UploadFile(file) {
     }
 }
 
-var btn = document.getElementById("upload-btn");
-var form = document.getElementById("upload-form");
-form.onsubmit = UploadFile;
+const form = document.getElementById("upload-form");
+if (form) {
+    form.onsubmit = UploadFile;
+}
