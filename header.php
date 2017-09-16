@@ -1,5 +1,26 @@
-<?php session_start() ?>
+<?php session_start();
 
+$login = null;
+if (!empty($_SESSION["username"])) {
+    $login = <<<HTML
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{$_SESSION["username"]}<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+        <li><a href="#">About Me</a></li>
+        <li role="separator" class="divider"></li>
+        <li><a href="logout.php">Logout</a></li>
+        </ul>
+    </li>
+HTML;
+} else {
+    $login = <<<HTML
+        <li><a href="login.php">Login</a></li>
+HTML;
+}
+
+$homeClass = ($currentPage == "HOME") ? "active" : "";
+
+echo <<<HTML
 <nav class="navbar navbar-inverse"  style="border-radius: 0px;">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -16,28 +37,14 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="index.php">Home<span class="sr-only">(current)</span></a></li>
+                <li class={$homeClass}><a href="index.php">Home<span class="sr-only">(current)</span></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-
-                        <?php
-                    if(!empty($_SESSION["username"])){
-                        echo <<<HTML
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{$_SESSION["username"]}<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">About Me</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="logout.php">Logout</a></li>
-          </ul>
-        </li>
-</ul>
-HTML;
-                    }else{
-                        echo "<li><a href=\"login.php\">Login</a></li>";
-                    }
-                    ?>
+                {$login}
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+HTML;
+
+?>

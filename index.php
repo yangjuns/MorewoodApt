@@ -21,7 +21,10 @@
 </head>
 <body>
     <!--    include header file-->
-    <?php include "header.php"?>
+    <?php
+        $currentPage = "HOME";
+        include "header.php"
+    ?>
 
     <!--    comments-->
     <div id="content-container">
