@@ -1,3 +1,4 @@
+<?php session_start()?>
 <!doctype html>
 <html>
 <head>
@@ -172,15 +173,23 @@
 
 	    </tbody>
 	</table>
+    <h2><?php echo("<a href='$ahref'>$atext hidden files</a>"); ?></h2>
 
-	<h2><?php echo("<a href='$ahref'>$atext hidden files</a>"); ?></h2>
+
+
 </div>
 
-<form id= "upload-form" action="../php/upload.php"} method="post" enctype="multipart/form-data">
-    Select file to upload:
-    <input type="file" name="fileToUpload" id="fileToUpload">
-    <input type="submit" value="Upload Image" id="upload-btn" name="submit">
-</form>
+<?php
+if(!empty($_SESSION["username"])){
+    echo <<<HTML
+    <form id= "upload-form" action="../php/upload.php"} method="post" enctype="multipart/form-data">
+        Select file to upload:
+        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="submit" value="Upload Image" id="upload-btn" name="submit">
+    </form>
+HTML;
+}
+?>
 
 <div class="progress">
     <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
