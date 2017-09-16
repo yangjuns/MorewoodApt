@@ -28,7 +28,6 @@
 	    $_SESSION["currentPage"] = "FILE";
 		include "../header.php"
 	?>
-	<h1>Data Center</h1>
 
 	<table class="sortable">
 	    <thead>
@@ -183,7 +182,7 @@
 if(!empty($_SESSION["username"])){
     echo <<<HTML
         <input type="file" name="fileToUpload" id="fileToUpload">
-        <input type="button" value="Upload Image" id="upload-btn" name="submit">
+        <button type="button" id="upload-btn">Upload</button>
 HTML;
 }
 ?>
