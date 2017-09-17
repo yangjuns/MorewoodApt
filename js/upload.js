@@ -40,8 +40,7 @@ function UploadFile() {
     request.send(data);
 }
 
-var btn = document.getElementById("upload-btn");
-var file = document.getElementById("fileToUpload");
-var bar_box = document.getElementById("bar-box");
-var bar = document.getElementById("progress-bar");
-btn.addEventListener("click", UploadFile);
+const btn = document.getElementById("upload-btn");
+if (btn != null) {
+    btn.addEventListener("click", UploadFile);
+}

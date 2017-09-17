@@ -1,6 +1,6 @@
 <?php
     $msg = '';
-    session_start();
+    include "util/sessionStart.php";
 
     if (!empty($_POST['username']) && !empty($_POST['password'])) {
       $username = $_POST['username'];

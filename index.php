@@ -1,4 +1,6 @@
-<?php session_start() ?>
+<?php
+include "util/sessionStart.php";
+?>
 
 <!DOCTYPE html>
 <html lang="en">
