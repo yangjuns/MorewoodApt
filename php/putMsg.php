@@ -1,5 +1,5 @@
 <?php
-session_start();
+include "../util/sessionStart.php";
 // arguments
 $userId = $_SESSION["userid"];
 $msg = $_POST["msg"];
