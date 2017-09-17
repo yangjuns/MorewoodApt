@@ -4,9 +4,9 @@ $login = null;
 if (!empty($_SESSION["username"])) {
     $login = <<<HTML
     <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{$_SESSION["username"]}<span class="caret"></span></a>
+        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{$_SESSION["username"]}<span class="caret"></span></a>
         <ul class="dropdown-menu">
-        <li><a href="#">About Me</a></li>
+        <li><a>About Me</a></li>
         <li role="separator" class="divider"></li>
         <li><a href="/logout.php">Logout</a></li>
         </ul>

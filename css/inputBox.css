@@ -4,44 +4,56 @@
     left: 0;
     right: 0;
     background-color: white;
-    padding: 15px 10px;
-    text-align: center;
+    padding: 15px 30px;
     box-shadow: 0px -2px 3px #dedede;
 }
 
+#input-form {
+    text-align: center;
+}
 
-#message {
+.msg-input {
     border: none;
     border-bottom: 1px solid #bdbdbd;
     padding-top: 10px;
     padding-bottom: 10px;
     font-size: 16px;
     color: #676767;
+    width: 80%;
 }
 
-#message:focus,
-#sendMsg:focus {
+.msg-input:focus,
+.send-msg-btn:focus {
     outline: none;
 }
 
-#message:focus {
+.msg-input:focus {
     border-bottom: 1px solid #66AFE0;
 }
 
-#message::-webkit-input-placeholder {
+.msg-input::-webkit-input-placeholder {
     color: #cbcbcb;
     font-size: 14px;
 }
 
-.submit-btn-container {
-    text-align: right;
-}
-
-#sendMsg {
-    transform: translateY(50%);
-    -webkit-transform: translateY(50%);
-    -ms-transform: translateY(50%);
+.send-msg-btn {
+    margin-left: 5%;
+    font-size: 14px;
     color: #66AFE0;
     background-color: white;
     border: none;
+}
+
+@media (max-width: 400px) {
+    #input-panel {
+        padding: 5px 30px;
+    }
+
+    .msg-input {
+        font-size: 14px;
+    }
+
+    .send-msg-btn {
+        margin-left: 0;
+    }
 }
