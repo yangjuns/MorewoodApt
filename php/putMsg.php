@@ -3,7 +3,7 @@ session_start();
 // arguments
 $userId = $_SESSION["userid"];
 $msg = $_POST["msg"];
-$emails = $_POST["emails"];
+$emails = empty($_POST["emails"]) ? "" : $_POST["emails"];
 
 // db parameters
 $db_server="morewood.life";

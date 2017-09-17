@@ -53,7 +53,7 @@
 	}
 
  	// Checks to see if veiwing hidden files is enabled
-	if($_SERVER['QUERY_STRING']=="hidden")
+	if(!empty($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] =="hidden")
 	{$hide="";
 	 $ahref="./.index.php";
 	 $atext="Hide";}

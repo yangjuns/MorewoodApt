@@ -1,7 +1,10 @@
 <?php
 
-$title = $_SESSION["title"];
-$webTitle = ($title) ? $title : "333 Morewood Apt 5";
+if(!empty($_SESSION["title"])){
+    $webTitle = $_SESSION["title"];
+}else{
+    $webTitle = "333 Morewood Apt 5";
+}
 
 echo <<<HTML
 <head>

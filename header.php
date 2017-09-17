@@ -1,5 +1,4 @@
-<?php session_start();
-
+<?php
 $login = null;
 if (!empty($_SESSION["username"])) {
     $login = <<<HTML
