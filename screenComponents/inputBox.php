@@ -1,4 +1,5 @@
 <?php
+include "util/sessionStart.php";
 
 if(!empty($_SESSION["username"])){
     echo <<<HTML

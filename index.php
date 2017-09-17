@@ -17,7 +17,7 @@ include "util/sessionStart.php";
     ?>
 
     <!--    comments-->
-    <div id="content-container" />
+    <div id="content-container"></div>
 
     <!--    Send Message-->
     <?php include "screenComponents/inputBox.php" ?>
