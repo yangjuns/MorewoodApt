@@ -1,4 +1,7 @@
-<?php session_start()?>
+<?php
+include "../util/sessionStart.php";
+?>
+
 <!doctype html>
 <html>
 <head>
