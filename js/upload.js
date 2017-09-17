@@ -1,3 +1,7 @@
+const file = document.getElementById("fileToUpload");
+const bar_box = document.getElementById("bar-box");
+const bar = document.getElementById("progress-bar");
+
 function AjaxCaller(){
     var xmlhttp=false;
     try{
@@ -44,7 +48,6 @@ function UploadFile() {
 function DeleteFile(item){
     //get the file
     var filename = item.parentNode.parentNode.firstElementChild.firstElementChild.innerHTML;
-    console.log(filename);
     $.ajax({
         type: "POST",
         data: {
