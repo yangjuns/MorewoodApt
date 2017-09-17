@@ -84,9 +84,9 @@ function sendMsg(){
                 msg: message,
                 emails: findMentions(message),
             },
-            url: "../php/putMsg.php",
+            url: "/php/putMsg.php",
             success: function(response) {
-                getMsg("../php/getMsg.php", info);
+                getMsg("/php/getMsg.php", info);
             },
         });
     }
@@ -96,12 +96,12 @@ function delMsg(id){
     ajax=AjaxCaller();
     var data =
         "commentid=" + encodeURIComponent(id);
-    ajax.open("POST", "../php/delMsg.php", true);
+    ajax.open("POST", "/php/delMsg.php", true);
     ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     ajax.onreadystatechange=function(){
         if(ajax.readyState==4){
             if(ajax.status==200){
-                getMsg("../php/getMsg.php", info);
+                getMsg("/php/getMsg.php", info);
             }
         }
     }

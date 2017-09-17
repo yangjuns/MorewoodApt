@@ -1,5 +1,7 @@
 <?php
-include "/util/sessionStart.php";
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 // arguments
 $userId = $_SESSION["userid"];
 $msg = $_POST["msg"];

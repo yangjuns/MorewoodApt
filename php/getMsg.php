@@ -1,6 +1,9 @@
 <?php
 
-include "/util/sessionStart.php";
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 // arguments
 $msgLimit = 20;
 

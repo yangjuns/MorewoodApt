@@ -1,5 +1,5 @@
 <?php
-include "../util/sessionStart.php";
+include $_SERVER["DOCUMENT_ROOT"] . "/util/sessionStart.php";
 ?>
 
 <!doctype html>
@@ -30,7 +30,7 @@ include "../util/sessionStart.php";
 <div id="container">
 	<?php
 	    $_SESSION["currentPage"] = "FILE";
-		include "../header.php"
+		include $_SERVER["DOCUMENT_ROOT"] . "/header.php"
 	?>
 
 	<table class="sortable">
@@ -182,7 +182,7 @@ HTML;
     }
     echo <<<HTML
 
-            </td> 		    
+            </td>
 		</tr>
 HTML;
 	   }

@@ -1,26 +1,26 @@
 <?php
-include "util/sessionStart.php";
+include $_SERVER["DOCUMENT_ROOT"] . "/util/sessionStart.php";
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <?php
-    include "head.php";
+    include $_SERVER["DOCUMENT_ROOT"] . "/head.php";
 ?>
 
 <body>
     <!--    include header file-->
     <?php
         $_SESSION["currentPage"] = "HOME";
-        include "header.php"
+        include $_SERVER["DOCUMENT_ROOT"] . "/header.php"
     ?>
 
     <!--    comments-->
     <div id="content-container"></div>
 
     <!--    Send Message-->
-    <?php include "screenComponents/inputBox.php" ?>
+    <?php include $_SERVER["DOCUMENT_ROOT"] . "/screenComponents/inputBox.php" ?>
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

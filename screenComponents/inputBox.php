@@ -1,5 +1,5 @@
 <?php
-include "util/sessionStart.php";
+include $_SERVER["DOCUMENT_ROOT"] . "/util/sessionStart.php";
 
 if(!empty($_SESSION["username"])){
     echo <<<HTML

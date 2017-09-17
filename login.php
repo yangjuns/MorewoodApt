@@ -1,6 +1,6 @@
 <?php
     $msg = '';
-    include "util/sessionStart.php";
+    include $_SERVER["DOCUMENT_ROOT"] . "/util/sessionStart.php";
 
     if (!empty($_POST['username']) && !empty($_POST['password'])) {
       $username = $_POST['username'];
@@ -36,11 +36,11 @@
 
 <?php
     $_SESSION["title"] = "333 Morewood Apt 5 - Login";
-    include "head.php";
+    include $_SERVER["DOCUMENT_ROOT"] . "/head.php";
 ?>
 
 <body>
-    <?php include "header.php" ?>
+    <?php include $_SERVER["DOCUMENT_ROOT"] . "/header.php" ?>
 
     <div id="content-container">
       <form class="" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);
