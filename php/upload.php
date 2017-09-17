@@ -1,5 +1,5 @@
 <?php
-$target_dir = "../uploads/";
+$target_dir = "/uploads/";
 
 $target_file = $target_dir . ($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;

@@ -1,6 +1,6 @@
 <?php
 
-include "../util/sessionStart.php";
+include "/util/sessionStart.php";
 // arguments
 $msgLimit = 20;
 
