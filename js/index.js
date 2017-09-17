@@ -150,5 +150,5 @@ if (inputPanel && isMobile()) {
     // inputPanel.addEventListener("focusout", lowerInput);
 }
 
-getMsg();
-setInterval("getMsg(\"../php/getMsg.php\", info)", 5000);
+getMsg("/php/getMsg.php", info);
+setInterval("getMsg(\"/php/getMsg.php\", info)", 5000);
