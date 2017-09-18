@@ -20,12 +20,6 @@ $db_password="qweasdzxc";
 $dbname = "morewoodapt";
 //$dbname = "morewoodapt_test";
 
-$conn = new mysqli($db_server, $db_user, $db_password, $dbname);
-if($conn->connect_errno > 0){
-    die('Unable to connect to database [' . $db->connect_error . ']');
-}
-$conn->query("SET NAMES utf8;");
-
 // setup email
 $mail->IsSMTP();
 $mail->SMTPDebug = 1;
