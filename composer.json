@@ -1,0 +1,7 @@
+{
+    "name": "morewoodlife",
+    "description": "life on morewood",
+    "require": {
+        "phpmailer/phpmailer": "~6.0"
+    }
+}

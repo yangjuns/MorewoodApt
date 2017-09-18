@@ -1,9 +1,16 @@
 <?php
+
+require $_SERVER["DOCUMENT_ROOT"] . "/vendor/autoload.php";
+
+$mail = new PHPMailer\PHPMailer\PHPMailer;
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
 // arguments
 $userId = $_SESSION["userid"];
+$userName = $_SESSION["username"];
 $msg = $_POST["msg"];
 $emails = $_POST["emails"];
 
@@ -22,18 +29,26 @@ $conn->query("SET NAMES utf8;");
 // prepare and bind
 $stmt = $conn->prepare("INSERT INTO comments (userid, comments) VALUES (?, ?)");
 $stmt->bind_param("is", $userId, $msg);
-
 // set parameters and execute
 $stmt->execute();
 $conn->close();
 
 if (sizeof($emails) > 0) {
-    $to = "hly.charles@gmail.com";
-    $subject = "My subject";
-    $txt = "Hello world!";
-    $headers = "From: lhou@andrew.cmu.edu" . "\r\n";
-
-    mail($to,$subject,$txt,$headers);
+    $mail->IsSMTP();
+    $mail->SMTPDebug = 1;
+    $mail->Host = "smtp.1and1.com";
+    $mail->Port = 465;
+    $mail->SMTPSecure = "ssl";
+    $mail->SMTPAuth = true;;
+    $mail->Username = "notification@morewood.life";
+    $mail->Password = "sleepearly2000";
+    for ($i = 0; $i < sizeof($emails); $i++) {
+        $mail->SetFrom("notification@morewood.life", "Morewood Life");
+        $mail->AddAddress($emails[$i]);
+        $mail->Subject = $userName . " mentioned you about morewoodlife";
+        $mail->Body = $msg;
+        $mail->Send();
+    }
 }
 
 ?>
