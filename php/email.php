@@ -23,6 +23,7 @@ $dbname = "morewoodapt";
 // setup email
 $mail->IsSMTP();
 $mail->SMTPDebug = 1;
+$mail->CharSet = "UTF-8";
 $mail->Host = "smtp.1and1.com";
 $mail->Port = 465;
 $mail->SMTPSecure = "ssl";
