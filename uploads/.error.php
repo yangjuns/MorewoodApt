@@ -1,6 +1,6 @@
 <?php
 
-$status=$_SERVER['REDIRECT_STATUS'];
+$status= (!empty($_SERVER['REDIRECT_STATUS'])) ? $_SERVER['REDIRECT_STATUS'] : "";
 $codes=array(
        400 => array('400 Bad Request', 'The request cannot be fulfilled due to bad syntax.'),
        401 => array('401 Login Error', 'It appears that the password and/or user-name you entered was incorrect. <a href="#" onclick="window.location.reload()">Click here</a> to return to the login page.'),
@@ -13,9 +13,9 @@ $codes=array(
        502 => array('502 Bad Gateway', 'The server received an invalid response from the upstream server while trying to fulfill the request.'),
        504 => array('504 Gateway Timeout', 'The upstream server failed to send a request in the time allowed by the server.'),
 );
- 
-$errortitle = $codes[$status][0];
-$message = $codes[$status][1];
+
+$errortitle = (strlen($status) > 0) ? $codes[$status][0] : "Unknown error";
+$message = (strlen($status) > 0) ? $codes[$status][1] : "Unknown error message";
 
 ?>
 
@@ -24,12 +24,12 @@ $message = $codes[$status][1];
 <head>
 	<title>That's an Error!</title>
 	<style>
-	  html 
+	  html
 	{color:#333;
 	 font-family: "Lucida Console", Courier, monospace;
 	 font-size:14px;
 	 background:#eeeeee;}
- 
+
 	.content
 	{margin:0 auto;
 	 width:1000px;
@@ -45,14 +45,14 @@ $message = $codes[$status][1];
 		{font-size:18px;
 		 text-align:center;}
 
-	h1.title 
+	h1.title
 		{color:red;}
-	
+
 	h2
 		{font-size:16px;
 		 text-align:center;}
-	
-	p 
+
+	p
 		{text-align:center;}
 
 	hr
