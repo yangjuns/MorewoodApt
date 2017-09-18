@@ -5,6 +5,7 @@ const Person = {
     ZACH: {name: "LYB"},
     LUYAO: {name: "Luyao"},
     YANG: {name: "Yangjun"},
+    MI: {name: "HashBrownnn"},
 };
 
 function isValidPerson(name) {
@@ -73,6 +74,17 @@ function findMentions(text) {
     return result;
 }
 
+function sendMail(message, names) {
+    $.ajax({
+        type: "POST",
+        data: {
+            msg: message,
+            receivers: names,
+        },
+        url: "/php/email.php",
+    });
+}
+
 function sendMsg(){
     const text = document.getElementsByClassName("msg-input")[0];
     const message = text.value.trim();
@@ -82,11 +94,14 @@ function sendMsg(){
             type: "POST",
             data: {
                 msg: message,
-                emails: findMentions(message),
             },
             url: "/php/putMsg.php",
             success: function(response) {
                 getMsg("/php/getMsg.php", info);
+                const mentions = findMentions(message);
+                if (mentions.length > 0) {
+                    sendMail(message, mentions);
+                }
             },
         });
     }
