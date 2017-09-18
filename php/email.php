@@ -46,14 +46,14 @@ for ($i = 0; $i < sizeof($receivers); $i++) {
     $stmt->bind_result($result);
     $stmt->fetch();
 
+    $stmt->close();
+    $conn->close();
+
     $mail->SetFrom($mailUserName, "Morewood Life");
     $mail->AddAddress($result);
     $mail->Subject = $userName . " mentioned you about morewoodlife";
     $mail->Body = $msg;
     $mail->Send();
-
-    $conn->close();
-
 }
 
 ?>
