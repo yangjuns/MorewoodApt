@@ -82,9 +82,6 @@ function sendMail(message, names) {
             receivers: names,
         },
         url: "/php/email.php",
-        success: function(response) {
-            console.log(response);
-        },
     });
 }
 

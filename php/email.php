@@ -13,8 +13,6 @@ $userName = $_SESSION["username"];
 $msg = $_POST["msg"];
 $receivers = $_POST["receivers"];
 
-var_dump($receivers);
-
 // db parameters
 $db_server="morewood.life";
 $db_user="root";
@@ -35,7 +33,9 @@ $mail->Host = "smtp.1and1.com";
 $mail->Port = 465;
 $mail->SMTPSecure = "ssl";
 $mail->SMTPAuth = true;;
-$mail->Username = "notification@morewood.life";
+$mailUserName = "notification@morewood";
+$mailUserName = $mailUserName . ".life";
+$mail->Username = $mailUserName;
 $mail->Password = "sleepearly2000";
 
 for ($i = 0; $i < sizeof($receivers); $i++) {
@@ -52,9 +52,7 @@ for ($i = 0; $i < sizeof($receivers); $i++) {
     $stmt->bind_result($result);
     $stmt->fetch();
 
-    var_dump($result);
-
-    $mail->SetFrom("notification@morewood.life", "Morewood Life");
+    $mail->SetFrom($mailUserName, "Morewood Life");
     $mail->AddAddress($result);
     $mail->Subject = $userName . " mentioned you about morewoodlife";
     $mail->Body = $msg;
