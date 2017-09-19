@@ -1,4 +1,12 @@
-const file = document.getElementById("fileToUpload");
+const file = document.getElementById("file-upload-input");
+const fileLabel = document.getElementById("file-upload-label");
+const btn = document.getElementById("file-upload-btn");
+
+if (btn != null) {
+    btn.addEventListener("click", UploadFile);
+    btn.disable = true;
+}
+
 const bar_box = document.getElementById("bar-box");
 const bar = document.getElementById("progress-bar");
 
@@ -18,6 +26,14 @@ function AjaxCaller(){
         xmlhttp = new XMLHttpRequest();
     }
     return xmlhttp;
+}
+
+function handleFiles(files) {
+    if (files.length > 0) {
+        fileLabel.innerHTML = files[0].name;
+        btn.disable = false;
+        btn.classList.remove("btn-disable");
+    }
 }
 
 function UploadFile() {
@@ -57,9 +73,4 @@ function DeleteFile(item){
         },
         url: "/php/deleteFile.php",
     });
-}
-
-const btn = document.getElementById("upload-btn");
-if (btn != null) {
-    btn.addEventListener("click", UploadFile);
 }

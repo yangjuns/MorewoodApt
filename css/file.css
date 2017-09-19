@@ -7,3 +7,60 @@
 .glyphicon-remove-circle:hover{
     cursor:hand;
 }
+
+#file-container {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 55px;
+    background-color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-shadow: 0px -2px 3px #dedede;
+}
+
+#file-form {
+    width: 100%;
+    text-align: center;
+    height: 100%;
+}
+
+#file-upload-label {
+    display: inline-block;
+    width: 40%;
+    cursor: pointer;
+    color: #66AFE0;
+    font-weight: normal;
+    text-align: center;
+    border-right: 2px solid #bdbdbd;
+    font-size: 16px;
+}
+
+#file-upload-input {
+    display: none;
+}
+
+#file-upload-btn {
+    display: inline-block;
+    width: 40%;
+    height: 100%;
+    vertical-align: middle;
+    background: none;
+    border: none;
+    outline: none;
+    color: #66AFE0;
+    text-align: center;
+    font-size: 16px;
+}
+
+.btn-disable {
+    color: #bdbdbd !important;
+}
+
+@media (max-width: 600px) {
+    #file-upload-input-container,
+    #file-upload-btn {
+        font-size: 12px;
+    }
+}

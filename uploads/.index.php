@@ -186,9 +186,14 @@ HTML;
 
 <?php
 if(!empty($_SESSION["username"])){
-    echo <<<HTML
-        <input type="file" name="fileToUpload" id="fileToUpload">
-        <button type="button" id="upload-btn">Upload</button>
+	echo <<<HTML
+	    <div id="file-container">
+		    <div id="file-form">
+				<label id="file-upload-label" for="file-upload-input">Choose File</label>
+				<input type="file" name="fileToUpload" id="file-upload-input" onchange="handleFiles(this.files)">
+				<button type="button" id="file-upload-btn" class="btn-disable">Upload</button>
+			</div>
+		</div>
 HTML;
 }
 ?>
