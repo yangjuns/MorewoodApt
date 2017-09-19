@@ -6,7 +6,7 @@ $password = "";
 $email = "";
 $userid = $_SESSION['userid'];
 
-$db_server = 'morewood.life';
+$db_server ="morewood.life";
 $db_user = 'root';
 $db_password = 'qweasdzxc';
 $db = new mysqli($db_server, $db_user, $db_password, 'morewoodapt');
