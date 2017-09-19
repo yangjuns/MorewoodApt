@@ -55,16 +55,6 @@ include $_SERVER["DOCUMENT_ROOT"] . "/util/sessionStart.php";
 		return $size;
 	}
 
- 	// Checks to see if veiwing hidden files is enabled
-	if($_SERVER['QUERY_STRING']=="hidden")
-	{$hide="";
-	 $ahref="./.index.php";
-	 $atext="Hide";}
-	else
-	{$hide=".";
-	 $ahref="./.index.php?hidden";
-	 $atext="Show";}
-
 	 // Opens directory
 	 $myDirectory=opendir(".");
 
@@ -86,7 +76,7 @@ include $_SERVER["DOCUMENT_ROOT"] . "/util/sessionStart.php";
 	for($index=0; $index < $indexCount; $index++) {
 
 	// Decides if hidden files should be displayed, based on query above.
-	    if(substr("$dirArray[$index]", 0, 1)!=$hide) {
+	    if(substr("$dirArray[$index]", 0, 1) != ".") {
 
 	// Resets Variables
 		$favicon="";
@@ -181,7 +171,6 @@ HTML;
 HTML;
     }
     echo <<<HTML
-
             </td>
 		</tr>
 HTML;
@@ -191,8 +180,6 @@ HTML;
 
 	    </tbody>
 	</table>
-    <h2><?php echo("<a href='$ahref'>$atext hidden files</a>"); ?></h2>
-
 
 
 </div>
