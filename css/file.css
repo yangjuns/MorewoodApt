@@ -33,7 +33,6 @@
     color: #66AFE0;
     font-weight: normal;
     text-align: center;
-    border-right: 2px solid #bdbdbd;
     font-size: 16px;
 }
 
@@ -62,9 +61,5 @@
     #file-upload-label,
     #file-upload-btn {
         font-size: 12px;
-    }
-
-    #file-upload-label {
-        border-right: 1px solid #bdbdbd;
     }
 }
