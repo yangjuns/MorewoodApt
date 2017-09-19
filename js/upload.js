@@ -1,9 +1,9 @@
 const file = document.getElementById("file-upload-input");
 const fileLabel = document.getElementById("file-upload-label");
+const fileList = document.getElementById("file-ls");
 const btn = document.getElementById("file-upload-btn");
 
 if (btn != null) {
-    btn.addEventListener("click", UploadFile);
     btn.disable = true;
 }
 
@@ -74,3 +74,13 @@ function DeleteFile(item){
         url: "/php/deleteFile.php",
     });
 }
+
+function adjustContentHeight() {
+    const fileContainer = document.getElementById("file-container");
+    if (fileContainer) {
+        const panelHeight = $(fileContainer).outerHeight();
+        $(fileList).css("margin-bottom", panelHeight + 20);
+    }
+}
+
+adjustContentHeight();

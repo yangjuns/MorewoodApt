@@ -13,7 +13,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    height: 55px;
+    height: 60px;
     background-color: white;
     padding-left: 10px;
     padding-right: 10px;
@@ -58,6 +58,10 @@
 }
 
 @media (max-width: 600px) {
+    #file-container {
+        height: 55px;
+    }
+
     #file-upload-label,
     #file-upload-btn {
         font-size: 12px;

@@ -27,7 +27,7 @@ include $_SERVER["DOCUMENT_ROOT"] . "/util/sessionStart.php";
 </head>
 
 <body>
-<div id="container">
+<div id="file-ls">
 	<?php
 	    $_SESSION["currentPage"] = "FILE";
 		include $_SERVER["DOCUMENT_ROOT"] . "/header.php"
@@ -188,11 +188,11 @@ HTML;
 if(!empty($_SESSION["username"])){
 	echo <<<HTML
 	    <div id="file-container">
-		    <div id="file-form">
+		    <form id="file-form" onsubmit="UploadFile()">
 				<label id="file-upload-label" for="file-upload-input">Choose File</label>
 				<input type="file" name="fileToUpload" id="file-upload-input" onchange="handleFiles(this.files)">
-				<button type="button" id="file-upload-btn" class="btn-disable">Upload</button>
-			</div>
+				<button type="submit" id="file-upload-btn" class="btn-disable">Upload</button>
+			</form>
 		</div>
 HTML;
 }
