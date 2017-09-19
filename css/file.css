@@ -59,8 +59,12 @@
 }
 
 @media (max-width: 600px) {
-    #file-upload-input-container,
+    #file-upload-label,
     #file-upload-btn {
         font-size: 12px;
+    }
+
+    #file-upload-label {
+        border-right: 1px solid #bdbdbd;
     }
 }
