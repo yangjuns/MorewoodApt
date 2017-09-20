@@ -193,7 +193,7 @@ if(!empty($_SESSION["username"])){
 				<label id="file-upload-label" for="file-upload-input">Choose File</label>
 				<input type="file" name="fileToUpload" id="file-upload-input" onchange="handleFiles(this.files)"/>
 				<button type="button" id="file-upload-btn" class="btn-disable">Upload</button>
-			</form>
+			</div>
 		</div>
 HTML;
 }
