@@ -3,12 +3,12 @@ const fileLabel = document.getElementById("file-upload-label");
 const fileList = document.getElementById("file-ls");
 const btn = document.getElementById("file-upload-btn");
 
+const progressBar = document.getElementById("upload-progress");
+
 if (btn != null) {
     btn.disable = true;
+    btn.onclick = UploadFile;
 }
-
-const bar_box = document.getElementById("bar-box");
-const bar = document.getElementById("progress-bar");
 
 function AjaxCaller(){
     var xmlhttp=false;
@@ -42,7 +42,6 @@ function UploadFile() {
     }
     var data = new FormData();
     data.append('fileToUpload', file.files[0]);
-    bar_box.style.display="block";
     var request = new XMLHttpRequest();
     request.onreadystatechange = function(){
         if(request.readyState == 4){
@@ -55,7 +54,7 @@ function UploadFile() {
         }
     };
     request.upload.addEventListener('progress', function(e){
-        bar.style.width = (e.loaded/e.total) * 100 + '%';
+        progressBar.style.width = (e.loaded/e.total) * 100 + '%';
     }, false);
     request.open('POST', "/php/upload.php");
     request.send(data);
