@@ -37,6 +37,7 @@ include $_SERVER["DOCUMENT_ROOT"] . "/util/sessionStart.php";
 	    <thead>
 		<tr>
 			<th>Filename</th>
+            <th>Uploader</th>
 			<th>Type</th>
 			<th>Size</th>
 			<th>Date Modified</th>
@@ -152,17 +153,46 @@ include $_SERVER["DOCUMENT_ROOT"] . "/util/sessionStart.php";
 				$size=pretty_filesize($dirArray[$index]);
 				$sizekey=filesize($dirArray[$index]);
 		}
+        // db parameters
+        $db_server="morewood.life";
+        $db_user="root";
+        $db_password="qweasdzxc";
+        $dbname = "morewoodapt";
+        //$dbname = "morewoodapt_test";
+        $userId = $_SESSION["userid"];
+        $conn = new mysqli($db_server, $db_user, $db_password, $dbname);
+        if($conn->connect_errno > 0){
+            die('Unable to connect to database [' . $db->connect_error . ']');
+        }
+        $conn->query("SET NAMES utf8;");
+        // prepare and bind
+        $stmt = $conn->prepare("SELECT firstname FROM files, users WHERE files.userid = users.userid AND filename = ?");
+        $stmt->bind_param("s", $name);
+        /* execute query */
+        $stmt->execute();
 
+        /* bind result variables */
+        $stmt->bind_result($username);
+
+        /* fetch value */
+        $stmt->fetch();
+
+        /* close statement */
+        $stmt->close();
+
+        $conn->close();
 	// Output
-    echo <<<HTML
-		<tr class='$class'>
-			<td><a href='./$namehref'$favicon class='name' download>$name</a></td>
-			<td><a href='./$namehref'>$extn</a></td>
-			<td sorttable_customkey='$sizekey'><a href='./$namehref'>$size</a></td>
-			<td sorttable_customkey='$timekey'><a href='./$namehref'>$modtime</a></td>
-			<td>
+        echo <<<HTML
+		    <tr class='$class'>
+                <td><a href='./$namehref'$favicon class='name' download>$name</a></td>
+                <td><a href='./$namehref'>$username</td>
+                <td><a href='./$namehref'>$extn</a></td>
+                <td sorttable_customkey='$sizekey'><a href='./$namehref'>$size</a></td>
+                <td sorttable_customkey='$timekey'><a href='./$namehref'>$modtime</a></td>
+                <td>
 HTML;
-    if(!empty($_SESSION["username"])) {
+    if((!empty($_SESSION["username"]) && $_SESSION["username"] == $username) ||
+        $username == "Unknown") {
         echo <<<HTML
         <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"
 			        style='color: red;' onclick='DeleteFile(this);'
