@@ -41,6 +41,7 @@ echo <<<HTML
             <ul class="nav navbar-nav">
                 <li class={$homeClass}><a href="/index.php">Home<span class="sr-only">(current)</span></a></li>
                 <li class={$fileClass}><a href="/uploads/.index.php">File<span class="sr-only">(current)</span></a></li>
+                <li><a href="/call.php">Call<span class="sr-only">(current)</span></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {$login}
