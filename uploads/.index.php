@@ -27,7 +27,7 @@ include $_SERVER["DOCUMENT_ROOT"] . "/util/sessionStart.php";
 </head>
 
 <body>
-<div id="container">
+<div id="file-ls">
 	<?php
 	    $_SESSION["currentPage"] = "FILE";
 		include $_SERVER["DOCUMENT_ROOT"] . "/header.php"
@@ -188,9 +188,10 @@ HTML;
 if(!empty($_SESSION["username"])){
 	echo <<<HTML
 	    <div id="file-container">
-		    <div id="file-form">
+		    <div id="upload-progress"></div>
+		    <div id="file-panel">
 				<label id="file-upload-label" for="file-upload-input">Choose File</label>
-				<input type="file" name="fileToUpload" id="file-upload-input" onchange="handleFiles(this.files)">
+				<input type="file" name="fileToUpload" id="file-upload-input" onchange="handleFiles(this.files)"/>
 				<button type="button" id="file-upload-btn" class="btn-disable">Upload</button>
 			</div>
 		</div>
@@ -198,14 +199,6 @@ HTML;
 }
 ?>
 
-<div class="progress" id = "bar-box" style="display:none">
-    <div id = "progress-bar"
-         class="progress-bar progress-bar-info progress-bar-striped"
-         role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"
-         style="width: 0%">
-        <span class="sr-only">20% Complete</span>
-    </div>
-</div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
