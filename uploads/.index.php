@@ -192,14 +192,16 @@ include $_SERVER["DOCUMENT_ROOT"] . "/util/sessionStart.php";
                 <td sorttable_customkey='$timekey'><a href='./$namehref'>$modtime</a></td>
                 <td>
 HTML;
-    if((!empty($_SESSION["username"]) && $_SESSION["username"] == $username) ||
-        $username == "Unknown") {
-        echo <<<HTML
+    if(!empty($_SESSION["username"])) {
+        if (($_SESSION["username"] == $username) ||
+            $username == "Unknown") {
+            echo <<<HTML
         <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"
 			        style='color: red;' onclick='DeleteFile(this);'
 	    ></span>
 
 HTML;
+        }
     }
     echo <<<HTML
             </td>
