@@ -14,6 +14,8 @@
     <?php include $_SERVER["DOCUMENT_ROOT"] . "/header.php" ?>
 
     <div id="call-container">
+        <iframe width="100%" height="1500" id="call-frame" src="https://yangjuns.info:8443" frameborder="0" scrolling="no">
+        </iframe>
     </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

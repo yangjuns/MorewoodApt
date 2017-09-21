@@ -1,3 +1,3 @@
-const callContainer = document.getElementById("call-container");
+const callContainer = document.getElementById("call-frame");
 
-$(callContainer).load("/call/");
+// $(callContainer).load("/call/");
