@@ -159,7 +159,7 @@ include $_SERVER["DOCUMENT_ROOT"] . "/util/sessionStart.php";
         $db_password="qweasdzxc";
         $dbname = "morewoodapt";
         //$dbname = "morewoodapt_test";
-        $userId = $_SESSION["userid"];
+        $userId = empty($_SESSION["userid"]) ? "" : $_SESSION["userid"];
         $conn = new mysqli($db_server, $db_user, $db_password, $dbname);
         if($conn->connect_errno > 0){
             die('Unable to connect to database [' . $db->connect_error . ']');
@@ -182,6 +182,7 @@ include $_SERVER["DOCUMENT_ROOT"] . "/util/sessionStart.php";
 
         $conn->close();
 	// Output
+        if($username == "") $username = "Unknown";
         echo <<<HTML
 		    <tr class='$class'>
                 <td><a href='./$namehref'$favicon class='name' download>$name</a></td>
