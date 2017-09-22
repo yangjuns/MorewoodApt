@@ -9,7 +9,7 @@ window.onload = function () {
     // Get the user name
     name = document.getElementById("username").firstChild.textContent;
 
-    conn = new WebSocket('ws://localhost:9090');
+    conn = new WebSocket('wss://morewood.life:9090');
 
     conn.onopen = function () {
         console.log("Connected to the signaling server");
@@ -54,9 +54,6 @@ window.onload = function () {
 
 }
 
-
-
-
 //alias for sending JSON encoded messages
 function send(message) {
     //attach the other peer username to our messages
@@ -81,9 +78,6 @@ var remoteVideo = document.querySelector('#remoteVideo');
 
 var yourConn;
 var stream;
-
-callPage.style.display = "none";
-
 
 function handleLogin(success) {
     if (success === false) {
@@ -124,6 +118,7 @@ function getReady(){
     //when a remote user adds stream to the peer connection, we display it
     yourConn.onaddstream = function (e) {
         remoteVideo.src = window.URL.createObjectURL(e.stream);
+        handUpBtn.style.display="inline-block";
     };
 
     // Setup ice handling
