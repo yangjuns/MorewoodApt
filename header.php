@@ -4,7 +4,7 @@ $login = null;
 if (!empty($_SESSION["username"])) {
     $login = <<<HTML
     <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{$_SESSION["username"]}<span class="caret"></span></a>
+        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="username"}>{$_SESSION["username"]}<span class="caret"></span></a>
         <ul class="dropdown-menu">
         <li><a href="/user.php">About Me</a></li>
         <li role="separator" class="divider"></li>
@@ -41,7 +41,7 @@ echo <<<HTML
             <ul class="nav navbar-nav">
                 <li class={$homeClass}><a href="/index.php">Home<span class="sr-only">(current)</span></a></li>
                 <li class={$fileClass}><a href="/uploads/.index.php">File<span class="sr-only">(current)</span></a></li>
-                <li><a href="/call_test.php">Call<span class="sr-only">(current)</span></a></li>
+                <li><a href="/call.php">Call<span class="sr-only">(current)</span></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {$login}

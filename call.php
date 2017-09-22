@@ -3,26 +3,58 @@
  ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
-<?php
-    $_SESSION["title"] = "333 Morewood Apt 5 - Call";
-    include $_SERVER["DOCUMENT_ROOT"] . "/head.php";
-?>
+<?php include "head.php"?>
+<style>
+    video {
+        background: black;
+        border: 1px solid gray;
+    }
+
+    .call-page {
+        position: relative;
+        display: block;
+        margin: 0 auto;
+        width: 500px;
+        height: 500px;
+    }
+
+    #localVideo {
+        width: 150px;
+        height: 150px;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+
+    #remoteVideo {
+        width: 500px;
+        height: 500px;
+    }
+
+</style>
 
 <body>
-    <?php include $_SERVER["DOCUMENT_ROOT"] . "/header.php" ?>
+<?php include "header.php"?>
 
-    <div id="call-container">
-        <iframe width="100%" height="1500" id="call-frame" src="https://yangjuns.info:8443" frameborder="0" scrolling="no">
-        </iframe>
+<div id = "callPage" class = "call-page">
+    <video id = "localVideo" autoplay></video>
+    <video id = "remoteVideo" autoplay></video>
+
+    <div class = "row text-center">
+        <div class = "col-md-12">
+            <input id = "callToUsernameInput" type = "text"
+                   placeholder = "username to call" />
+            <button id = "callBtn" class = "btn-success btn">Call</button>
+            <button id = "hangUpBtn" class = "btn-danger btn">Hang Up</button>
+        </div>
     </div>
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="js/call.js"></script>
+</div>
+
+<script src = "/js/call.js"></script>
 
 </body>
+
 </html>
