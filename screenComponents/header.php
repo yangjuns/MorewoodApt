@@ -20,7 +20,7 @@ HTML;
 $currentPage = (!empty($_SESSION["currentPage"])) ? $_SESSION["currentPage"] : "";
 $homeClass = ($currentPage == "HOME") ? "active" : "";
 $fileClass = ($currentPage == "FILE") ? "active" : "";
-
+$callClass = ($currentPage == "CALL") ? "active" : "";
 echo <<<HTML
 <nav class="navbar navbar-inverse"  style="border-radius: 0px;">
     <div class="container-fluid">
@@ -40,7 +40,7 @@ echo <<<HTML
             <ul class="nav navbar-nav">
                 <li class={$homeClass}><a href="/index.php">Home<span class="sr-only">(current)</span></a></li>
                 <li class={$fileClass}><a href="/uploads/.index.php">File<span class="sr-only">(current)</span></a></li>
-                <li><a href="/call.php">Call<span class="sr-only">(current)</span></a></li>
+                <li class={$callClass}><a href="/call.php">Call<span class="sr-only">(current)</span></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {$login}
