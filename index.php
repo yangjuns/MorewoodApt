@@ -3,20 +3,20 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php include $_SERVER["DOCUMENT_ROOT"] . "/head.php"; ?>
+<?php include $_SERVER["DOCUMENT_ROOT"] . "/components/head.php"; ?>
 
 <body>
     <!--    include header file-->
     <?php
         $_SESSION["currentPage"] = "HOME";
-        include $_SERVER["DOCUMENT_ROOT"] . "/screenComponents/header.php";
+        include $_SERVER["DOCUMENT_ROOT"] . "/components/header.php";
     ?>
 
     <!--    comments-->
     <div id="content-container"></div>
 
     <!--    Send Message-->
-    <?php include $_SERVER["DOCUMENT_ROOT"] . "/screenComponents/inputBox.php" ?>
+    <?php include $_SERVER["DOCUMENT_ROOT"] . "/components/inputBox.php" ?>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

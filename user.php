@@ -36,11 +36,11 @@ $db->close();
 
 <?php
 $_SESSION["title"] = "333 Morewood Apt 5 - Login";
-include include $_SERVER["DOCUMENT_ROOT"] . "/head.php";
+include include $_SERVER["DOCUMENT_ROOT"] . "/components/head.php";
 ?>
 
 <body>
-<?php include $_SERVER["DOCUMENT_ROOT"] . "/screenComponents/header.php"; ?>
+<?php include $_SERVER["DOCUMENT_ROOT"] . "/components/header.php"; ?>
 
 <ul class="list-group">
     <li class="list-group-item list-group-item-success">Firstname: <?php echo $firstname?></li>

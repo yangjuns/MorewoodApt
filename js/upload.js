@@ -2,12 +2,11 @@ const file = document.getElementById("file-upload-input");
 const fileLabel = document.getElementById("file-upload-label");
 const fileList = document.getElementById("file-ls");
 const btn = document.getElementById("file-upload-btn");
-
 const progressBar = document.getElementById("upload-progress");
 
 if (btn != null) {
     btn.disable = true;
-    btn.onclick = UploadFile;
+    btn.onclick = uploadFile;
 }
 
 function handleFiles(files) {
@@ -18,7 +17,7 @@ function handleFiles(files) {
     }
 }
 
-function UploadFile() {
+function uploadFile() {
     if(file.files.length === 0){
         return;
     }
@@ -42,18 +41,16 @@ function UploadFile() {
     request.send(data);
 }
 
-function DeleteFile(item){
+function deleteFile(item){
     //get the file
     var filename = item.parentNode.parentNode.firstElementChild.firstElementChild.innerHTML;
-    $.ajax({
-        type: "POST",
-        data: {
-            msg: filename,
-        },success: function(response) {
-            window.location.reload();
+    $.post("/php/deleteFile.php",
+        {
+            msg: filename
         },
-        url: "/php/deleteFile.php",
-    });
+        function(response) {
+            window.location.reload();
+        });
 }
 
 function adjustContentHeight() {

@@ -36,11 +36,11 @@
 
 <?php
     $_SESSION["title"] = "333 Morewood Apt 5 - Login";
-    include $_SERVER["DOCUMENT_ROOT"] . "/head.php";
+    include $_SERVER["DOCUMENT_ROOT"] . "/components/head.php";
 ?>
 
 <body>
-    <?php include $_SERVER["DOCUMENT_ROOT"] . "/screenComponents/header.php" ?>
+    <?php include $_SERVER["DOCUMENT_ROOT"] . "/components/header.php" ?>
 
     <div id="content-container">
       <form class="" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);

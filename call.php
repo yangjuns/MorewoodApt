@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 
-<?php include "head.php"?>
+<?php include $_SERVER["DOCUMENT_ROOT"] . "/components/head.php" ?>
 <style>
     video {
         background: black;
@@ -38,7 +38,7 @@
 <body>
 <?php
     $_SESSION["currentPage"] = "CALL";
-    include $_SERVER["DOCUMENT_ROOT"] . "/screenComponents/header.php";
+    include $_SERVER["DOCUMENT_ROOT"] . "/components/header.php";
 ?>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

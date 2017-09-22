@@ -29,7 +29,7 @@ include $_SERVER["DOCUMENT_ROOT"] . "/php/sessionStart.php";
 <div id="file-ls">
 	<?php
 	    $_SESSION["currentPage"] = "FILE";
-        include $_SERVER["DOCUMENT_ROOT"] . "/screenComponents/header.php"
+    include $_SERVER["DOCUMENT_ROOT"] . "/components/header.php"
 	?>
 
 	<table class="sortable">
@@ -187,7 +187,7 @@ HTML;
                 $username == "Unknown") {
                 echo <<<HTML
             <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"
-                        style='color: red;' onclick='DeleteFile(this);'
+                        style='color: red;' onclick='deleteFile(this);'
             ></span>
 
 HTML;
