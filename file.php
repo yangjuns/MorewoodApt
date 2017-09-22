@@ -12,8 +12,8 @@ include $_SERVER["DOCUMENT_ROOT"] . "/php/sessionStart.php";
     <title>333 Morewood Apt 5</title>
 
     <!-- Bootstrap -->
-    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/index.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -21,16 +21,15 @@ include $_SERVER["DOCUMENT_ROOT"] . "/php/sessionStart.php";
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <link rel="stylesheet" href=".style.css">
     <link rel="stylesheet" href="/css/file.css">
-   <script src=".sorttable.js"></script>
+    <script src="js/file.js"></script>
 </head>
 
 <body>
 <div id="file-ls">
 	<?php
 	    $_SESSION["currentPage"] = "FILE";
-		include $_SERVER["DOCUMENT_ROOT"] . "/screenComponents/header.php"
+        include $_SERVER["DOCUMENT_ROOT"] . "/screenComponents/header.php"
 	?>
 
 	<table class="sortable">
@@ -44,9 +43,10 @@ include $_SERVER["DOCUMENT_ROOT"] . "/php/sessionStart.php";
             <th></th>
 		</tr>
 	    </thead>
-	    <tbody><?php
-
-	// Adds pretty filesizes
+	    <tbody>
+        <?php
+    $uploadDir = $_SERVER["DOCUMENT_ROOT"] . "/uploads/";
+	// Return file size as a string
 	function pretty_filesize($file) {
 		$size=filesize($file);
 		if($size<1024){$size = $size . " Bytes";}
@@ -56,8 +56,8 @@ include $_SERVER["DOCUMENT_ROOT"] . "/php/sessionStart.php";
 		return $size;
 	}
 
-	 // Opens directory
-	 $myDirectory=opendir(".");
+	// Opens directory
+    $myDirectory=opendir($uploadDir);
 
 	// Gets each entry
 	while($entryName=readdir($myDirectory)) {
@@ -70,50 +70,40 @@ include $_SERVER["DOCUMENT_ROOT"] . "/php/sessionStart.php";
 	// Counts elements in array
 	$indexCount=count($dirArray);
 
-	// Sorts files
-	sort($dirArray);
-
 	// Loops through the array of files
 	for($index=0; $index < $indexCount; $index++) {
 
-	// Decides if hidden files should be displayed, based on query above.
-	    if(substr("$dirArray[$index]", 0, 1) != ".") {
-
-	// Resets Variables
+	    // Resets Variables
 		$favicon="";
 		$class="file";
 
-	// Gets File Names
-		$name=$dirArray[$index];
+	    // Gets File Display Names
+		$name= $dirArray[$index];
 		$namehref=$dirArray[$index];
 
-	// Gets Date Modified
-		$modtime=date("M j Y g:i A", filemtime($dirArray[$index]));
-		$timekey=date("YmdHis", filemtime($dirArray[$index]));
+	    // Gets Date Modified
+		$modtime=date("M j Y g:i A", filemtime($_SERVER["DOCUMENT_ROOT"]. "/uploads/" . $dirArray[$index]));
+		$timekey=date("YmdHis", filemtime($_SERVER["DOCUMENT_ROOT"]. "/uploads/" .$dirArray[$index]));
 
 
-	// Separates directories, and performs operations on those directories
-		if(is_dir($dirArray[$index]))
-		{
-				$extn="&lt;Directory&gt;";
-				$size="&lt;Directory&gt;";
-				$sizekey="0";
-				$class="dir";
+	    // Separates directories, and performs operations on those directories
+		if(is_dir($uploadDir.$dirArray[$index])) {
+            $extn="&lt;Directory&gt;";
+            $size="&lt;Directory&gt;";
+            $sizekey="0";
+            $class="dir";
 
 			// Gets favicon.ico, and displays it, only if it exists.
-				if(file_exists("$namehref/favicon.ico"))
-					{
-						$favicon=" style='background-image:url($namehref/favicon.ico);'";
-						$extn="&lt;Website&gt;";
-					}
+            if(file_exists("$namehref/favicon.ico"))
+            {
+                $favicon=" style='background-image:url($namehref/favicon.ico);'";
+                $extn="&lt;Website&gt;";
+            }
 
 			// Cleans up . and .. directories
-				if($name=="."){$name=". (Current Directory)"; $extn="&lt;System Dir&gt;"; $favicon=" style='background-image:url($namehref/.favicon.ico);'";}
-				if($name==".."){$name=".. (Parent Directory)"; $extn="&lt;System Dir&gt;";}
-		}
-
-	// File-only operations
-		else{
+            if($name==".") continue;
+            if($name=="..") continue;
+		} else { // File-only operations
 			// Gets file extension
 			$extn=pathinfo($dirArray[$index], PATHINFO_EXTENSION);
 
@@ -150,16 +140,16 @@ include $_SERVER["DOCUMENT_ROOT"] . "/php/sessionStart.php";
 			}
 
 			// Gets and cleans up file size
-				$size=pretty_filesize($dirArray[$index]);
-				$sizekey=filesize($dirArray[$index]);
+            $size=pretty_filesize($uploadDir.$dirArray[$index]);
+            $sizekey=filesize($uploadDir.$dirArray[$index]);
 		}
+		// Retrieve Uploader
         // db parameters
         $db_server="morewood.life";
         $db_user="root";
         $db_password="qweasdzxc";
         $dbname = "morewoodapt";
         //$dbname = "morewoodapt_test";
-        $userId = empty($_SESSION["userid"]) ? "" : $_SESSION["userid"];
         $conn = new mysqli($db_server, $db_user, $db_password, $dbname);
         if($conn->connect_errno > 0){
             die('Unable to connect to database [' . $db->connect_error . ']');
@@ -181,7 +171,7 @@ include $_SERVER["DOCUMENT_ROOT"] . "/php/sessionStart.php";
         $stmt->close();
 
         $conn->close();
-	// Output
+	    // Output
         if($username == "") $username = "Unknown";
         echo <<<HTML
 		    <tr class='$class'>
@@ -192,29 +182,25 @@ include $_SERVER["DOCUMENT_ROOT"] . "/php/sessionStart.php";
                 <td sorttable_customkey='$timekey'><a href='./$namehref'>$modtime</a></td>
                 <td>
 HTML;
-    if(!empty($_SESSION["username"])) {
-        if (($_SESSION["username"] == $username) ||
-            $username == "Unknown") {
-            echo <<<HTML
-        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"
-			        style='color: red;' onclick='DeleteFile(this);'
-	    ></span>
+        if(!empty($_SESSION["username"])) {
+            if (($_SESSION["username"] == $username) ||
+                $username == "Unknown") {
+                echo <<<HTML
+            <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"
+                        style='color: red;' onclick='DeleteFile(this);'
+            ></span>
 
 HTML;
+            }
         }
-    }
     echo <<<HTML
             </td>
 		</tr>
 HTML;
-	   }
 	}
 	?>
-
 	    </tbody>
 	</table>
-
-
 </div>
 
 <?php
@@ -235,7 +221,7 @@ HTML;
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="../bootstrap/js/bootstrap.min.js"></script>
-<script src="../js/upload.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="js/upload.js"></script>
 </body>
 </html>
