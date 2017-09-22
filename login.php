@@ -1,6 +1,6 @@
 <?php
     $msg = '';
-    include $_SERVER["DOCUMENT_ROOT"] . "/util/sessionStart.php";
+    include $_SERVER["DOCUMENT_ROOT"] . "/php/sessionStart.php";
 
     if (!empty($_POST['username']) && !empty($_POST['password'])) {
       $username = $_POST['username'];
@@ -40,7 +40,7 @@
 ?>
 
 <body>
-    <?php include $_SERVER["DOCUMENT_ROOT"] . "/header.php" ?>
+    <?php include $_SERVER["DOCUMENT_ROOT"] . "/screenComponents/header.php" ?>
 
     <div id="content-container">
       <form class="" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);

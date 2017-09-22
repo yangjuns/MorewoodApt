@@ -1,5 +1,4 @@
 <?php
-
 $login = null;
 if (!empty($_SESSION["username"])) {
     $login = <<<HTML
@@ -8,7 +7,7 @@ if (!empty($_SESSION["username"])) {
         <ul class="dropdown-menu">
         <li><a href="/user.php">About Me</a></li>
         <li role="separator" class="divider"></li>
-        <li><a href="/logout.php">Logout</a></li>
+        <li><a href="/php/logout.php">Logout</a></li>
         </ul>
     </li>
 HTML;

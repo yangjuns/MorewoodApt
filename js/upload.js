@@ -10,24 +10,6 @@ if (btn != null) {
     btn.onclick = UploadFile;
 }
 
-function AjaxCaller(){
-    var xmlhttp=false;
-    try{
-        xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
-    }catch(e){
-        try{
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }catch(E){
-            xmlhttp = false;
-        }
-    }
-
-    if(!xmlhttp && typeof XMLHttpRequest!='undefined'){
-        xmlhttp = new XMLHttpRequest();
-    }
-    return xmlhttp;
-}
-
 function handleFiles(files) {
     if (files.length > 0) {
         fileLabel.innerHTML = files[0].name;

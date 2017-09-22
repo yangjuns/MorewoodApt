@@ -1,5 +1,5 @@
 <?php
-include $_SERVER["DOCUMENT_ROOT"] . "/util/sessionStart.php";
+include $_SERVER["DOCUMENT_ROOT"] . "/php/sessionStart.php";
 $target_dir = $_SERVER["DOCUMENT_ROOT"] . "/uploads/";
 
 $target_file = $target_dir . ($_FILES["fileToUpload"]["name"]);

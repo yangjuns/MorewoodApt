@@ -1,5 +1,5 @@
 <?php
-include $_SERVER["DOCUMENT_ROOT"] . "/util/sessionStart.php";
+include $_SERVER["DOCUMENT_ROOT"] . "/php/sessionStart.php";
 $firstname = "";
 $lastname = "";
 $password = "";
@@ -31,35 +31,28 @@ if($result->num_rows == 0){
 $db->close();
 ?>
 
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-    <?php
-    $_SESSION["title"] = "333 Morewood Apt 5 - Login";
-    include "head.php";
-    ?>
-
-    <body>
-    <?php include "header.php" ?>
-
-    <ul class="list-group">
-        <li class="list-group-item list-group-item-success">Firstname: <?php echo $firstname?></li>
-        <li class="list-group-item list-group-item-info">Lastname: <?php echo $lastname?></li>
-        <li class="list-group-item list-group-item-warning">Password: <?php echo $password?> </li>
-        <li class="list-group-item list-group-item-danger">Email: <?php echo $email?> </li>
-    </ul>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-
-    </body>
-    </html>
 <?php
-/**
- * Created by PhpStorm.
- * User: yang
- * Date: 9/18/17
- * Time: 11:39 PM
- */
+$_SESSION["title"] = "333 Morewood Apt 5 - Login";
+include include $_SERVER["DOCUMENT_ROOT"] . "/head.php";
+?>
+
+<body>
+<?php include $_SERVER["DOCUMENT_ROOT"] . "/screenComponents/header.php"; ?>
+
+<ul class="list-group">
+    <li class="list-group-item list-group-item-success">Firstname: <?php echo $firstname?></li>
+    <li class="list-group-item list-group-item-info">Lastname: <?php echo $lastname?></li>
+    <li class="list-group-item list-group-item-warning">Password: <?php echo $password?> </li>
+    <li class="list-group-item list-group-item-danger">Email: <?php echo $email?> </li>
+</ul>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,5 +1,5 @@
 <?php
-include $_SERVER["DOCUMENT_ROOT"] . "/util/sessionStart.php";
+include $_SERVER["DOCUMENT_ROOT"] . "/php/sessionStart.php";
 ?>
 
 <!doctype html>
@@ -30,7 +30,7 @@ include $_SERVER["DOCUMENT_ROOT"] . "/util/sessionStart.php";
 <div id="file-ls">
 	<?php
 	    $_SESSION["currentPage"] = "FILE";
-		include $_SERVER["DOCUMENT_ROOT"] . "/header.php"
+		include $_SERVER["DOCUMENT_ROOT"] . "/screenComponents/header.php"
 	?>
 
 	<table class="sortable">
