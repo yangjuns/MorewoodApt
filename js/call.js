@@ -42,6 +42,9 @@ window.onload = function () {
                 console.log("The remote client closed connection.");
                 handleLeave();
                 break;
+            case "query":
+                console.log("Received all online users");
+                handleQuery(data.users);
             default:
                 break;
         }
@@ -75,7 +78,7 @@ var hangUpBtn = document.querySelector('#hangUpBtn');
 
 var localVideo = document.querySelector('#localVideo');
 var remoteVideo = document.querySelector('#remoteVideo');
-
+var onlineUsers = document.querySelector("#onlineUsers");
 var yourConn;
 var stream;
 
@@ -88,6 +91,9 @@ function handleLogin(success) {
         //**********************
         //Starting a peer connection
         //**********************
+
+        // Get online users
+        send({type:"query", from:name});
 
         //getting local video stream
         navigator.getUserMedia({ video: true, audio: true }, function (myStream) {
@@ -180,6 +186,23 @@ function handleAnswer(answer) {
     yourConn.setRemoteDescription(new RTCSessionDescription(answer));
 };
 
+//when we got a list of online users from server
+function handleQuery(names){
+    onlineUsers.innerHTML = "";
+    for(i=0;i <names.length; i++){
+        var node = document.createElement("a");                 // Create a <li> node
+        var textnode = document.createTextNode(names[i]);         // Create a text node
+        node.appendChild(textnode);                              // Append the text to <li>
+        node.classList.add("list-group-item");
+        node.classList.add("list-group-item-success");
+        if(names[i] == name){
+            node.classList.add("disabled");
+        }
+        onlineUsers.appendChild(node);
+    }
+
+}
+
 //when we got an ice candidate from a remote user
 function handleCandidate(candidate) {
     yourConn.addIceCandidate(new RTCIceCandidate(candidate));
@@ -189,7 +212,8 @@ function handleCandidate(candidate) {
 hangUpBtn.addEventListener("click", function () {
     console.log("You closed connected.");
     send({
-        type: "leave"
+        type: "leave",
+        from: name
     });
 
     handleLeave();
