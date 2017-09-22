@@ -1,6 +1,4 @@
-const info = document.getElementById( "content-container" );
 const inputPanel = document.getElementById("input-panel");
-
 const Person = {
     ZACH: {name: "LYB"},
     LUYAO: {name: "Luyao"},
@@ -20,36 +18,44 @@ function isValidPerson(name) {
     return "";
 }
 
+// When document is ready, load message every 5 seconds
+$(document).ready(function () {
+    getMsg();
+    setInterval("getMsg()", 5000);
+});
 
-function AjaxCaller(){
-    var xmlhttp=false;
-    try{
-        xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
-    }catch(e){
-        try{
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }catch(E){
-            xmlhttp = false;
-        }
-    }
+$("#input-form").submit(function (e) {
+    e.preventDefault();
+    sendMsg();
+});
 
-    if(!xmlhttp && typeof XMLHttpRequest!='undefined'){
-        xmlhttp = new XMLHttpRequest();
-    }
-    return xmlhttp;
+// Message Functions
+function getMsg(){
+    $("#content-container").load("/php/getMsg.php");
 }
 
-function getMsg(url, div){
-    ajax=AjaxCaller();
-    ajax.open("GET", url, true);
-    ajax.onreadystatechange=function(){
-        if(ajax.readyState==4){
-            if(ajax.status==200){
-                div.innerHTML = ajax.responseText;
+function sendMsg(){
+    const message = $(".msg-input").val().trim();
+    $(".msg-input").val("");
+    if(message!=""){
+        $.post("/php/putMsg.php",
+            {msg: message},
+            function() {
+                getMsg();
+                const mentions = findMentions(message);
+                if (mentions.length > 0) {
+                    sendMail(message, mentions);
+                }
             }
-        }
+        );
     }
-    ajax.send(null);
+}
+
+function delMsg(id){
+    $.post("/php/delMsg.php",
+        {commentid: id},
+        function() {getMsg();}
+    );
 }
 
 function findMentions(text) {
@@ -85,55 +91,10 @@ function sendMail(message, names) {
     });
 }
 
-function sendMsg(){
-    const text = document.getElementsByClassName("msg-input")[0];
-    const message = text.value.trim();
-    text.value = "";
-    if(message!=""){
-        $.ajax({
-            type: "POST",
-            data: {
-                msg: message,
-            },
-            url: "/php/putMsg.php",
-            success: function(response) {
-                getMsg("/php/getMsg.php", info);
-                const mentions = findMentions(message);
-                if (mentions.length > 0) {
-                    sendMail(message, mentions);
-                }
-            },
-        });
-    }
-}
-
-function delMsg(id){
-    ajax=AjaxCaller();
-    var data =
-        "commentid=" + encodeURIComponent(id);
-    ajax.open("POST", "/php/delMsg.php", true);
-    ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    ajax.onreadystatechange=function(){
-        if(ajax.readyState==4){
-            if(ajax.status==200){
-                getMsg("/php/getMsg.php", info);
-            }
-        }
-    }
-    ajax.send(data);
-}
-
-function handleInputSubmit(event) {
-    event.preventDefault();
-    sendMsg();
-}
-
+// UI Functions
 function adjustContentHeight() {
-    if (inputPanel) {
-        const panelHeight = $(inputPanel).outerHeight();
-        const content = document.getElementById("content-container");
-        $(content).css("margin-bottom", panelHeight + 20);
-    }
+    const panelHeight = $("#inputPanel").outerHeight();
+    $("#content-container").css("margin-bottom", panelHeight + 20);
 }
 
 function isMobile() {
@@ -150,12 +111,6 @@ function lowerInput() {
     $(inputPanel).css("top", "");
 }
 
-
-const inputForm = document.getElementById("input-form");
-if (inputForm) {
-    inputForm.onsubmit = handleInputSubmit;
-}
-
 adjustContentHeight();
 window.addEventListener("resize", adjustContentHeight);
 
@@ -165,5 +120,5 @@ if (inputPanel && isMobile()) {
     // inputPanel.addEventListener("focusout", lowerInput);
 }
 
-getMsg("/php/getMsg.php", info);
-setInterval("getMsg(\"/php/getMsg.php\", info)", 5000);
+
+

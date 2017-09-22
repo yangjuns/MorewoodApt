@@ -1,13 +1,46 @@
 //our username
 var name;
 var connectedUser;
-var conn;
+var conn;      // Ronnection to signal server
+var yourConn;  // RTC P2P connection
+var stream;    // Your local video stream
 
 // connect to signaling server when page is ready
-window.onload = function () {
-    console.log("document load completed!");
+$(document).ready(function () {
+    // Add functions to btns
+    $("#hangUpBtn").click(function () {
+        console.log("You closed connected.");
+        send({
+            type: "leave",
+            from: name
+        });
+        handleLeave();
+    });
+    $("#callBtn").click(function () {
+
+        var callToUsername = $("#callToUsernameInput").val();
+
+        if (callToUsername.length > 0) {
+
+            connectedUser = callToUsername;
+
+            // create an offer
+            yourConn.createOffer(function (offer) {
+                send({
+                    type: "offer",
+                    offer: offer
+                });
+
+                yourConn.setLocalDescription(offer);
+            }, function (error) {
+                alert("Error when creating an offer");
+            });
+
+        }
+    });
+
     // Get the user name
-    name = document.getElementById("username").firstChild.textContent;
+    name = $("#username").text();
 
     conn = new WebSocket('wss://morewood.life:9090');
 
@@ -53,63 +86,9 @@ window.onload = function () {
     conn.onerror = function (err) {
         console.log("Got error", err);
     };
+});
 
-
-}
-
-//alias for sending JSON encoded messages
-function send(message) {
-    //attach the other peer username to our messages
-    if (connectedUser) {
-        message.name = connectedUser;
-    }
-
-    conn.send(JSON.stringify(message));
-};
-
-//******
-//UI selectors block
-//******
-var callPage = document.querySelector('#callPage');
-var callToUsernameInput = document.querySelector('#callToUsernameInput');
-var callBtn = document.querySelector('#callBtn');
-
-var hangUpBtn = document.querySelector('#hangUpBtn');
-
-var localVideo = document.querySelector('#localVideo');
-var remoteVideo = document.querySelector('#remoteVideo');
-var onlineUsers = document.querySelector("#onlineUsers");
-var yourConn;
-var stream;
-
-function handleLogin(success) {
-    if (success === false) {
-        alert("Ooops...try a different username");
-    } else {
-        callPage.style.display = "block";
-
-        //**********************
-        //Starting a peer connection
-        //**********************
-
-        // Get online users
-        send({type:"query", from:name});
-
-        //getting local video stream
-        navigator.getUserMedia({ video: true, audio: true }, function (myStream) {
-            stream = myStream;
-
-            //displaying local video stream on the page
-            localVideo.src = window.URL.createObjectURL(stream);
-
-            getReady();
-        }, function (error) {
-            console.log(error);
-        });
-
-    }
-};
-
+// Ready to send/answer peer connections
 function getReady(){
     //using Google public stun server
     var configuration = {
@@ -123,8 +102,8 @@ function getReady(){
 
     //when a remote user adds stream to the peer connection, we display it
     yourConn.onaddstream = function (e) {
-        remoteVideo.src = window.URL.createObjectURL(e.stream);
-        handUpBtn.style.display="inline-block";
+        $("#remoteVideo").attr("src", window.URL.createObjectURL(e.stream)).load();
+        $("#hangUpBtn").show();
     };
 
     // Setup ice handling
@@ -138,29 +117,43 @@ function getReady(){
     };
 }
 
-//initiating a call
-callBtn.addEventListener("click", function () {
+//alias for sending JSON encoded messages
+function send(message) {
+    //attach the other peer username to our messages
+    if (connectedUser) {
+        message.name = connectedUser;
+    }
 
-    var callToUsername = callToUsernameInput.value;
+    conn.send(JSON.stringify(message));
+};
 
-    if (callToUsername.length > 0) {
+function handleLogin(success) {
+    if (success === false) {
+        alert("Ooops...try a different username");
+    } else {
+        $("#callPage").show();
 
-        connectedUser = callToUsername;
+        //**********************
+        //Starting a peer connection
+        //**********************
 
-        // create an offer
-        yourConn.createOffer(function (offer) {
-            send({
-                type: "offer",
-                offer: offer
-            });
+        // Get online users
+        send({type:"query", from:name});
 
-            yourConn.setLocalDescription(offer);
+        //getting local video stream
+        navigator.getUserMedia({ video: true, audio: true }, function (myStream) {
+            stream = myStream;
+
+            //displaying local video stream on the page
+            $("#localVideo").attr("src", window.URL.createObjectURL(stream)).load();
+
+            getReady();
         }, function (error) {
-            alert("Error when creating an offer");
+            console.log(error);
         });
 
     }
-});
+};
 
 //when somebody sends us an offer
 function handleOffer(offer, name) {
@@ -188,19 +181,15 @@ function handleAnswer(answer) {
 
 //when we got a list of online users from server
 function handleQuery(names){
-    onlineUsers.innerHTML = "";
+    $("#onlineUsers").empty();
     for(i=0;i <names.length; i++){
-        var node = document.createElement("a");                 // Create a <li> node
-        var textnode = document.createTextNode(names[i]);         // Create a text node
-        node.appendChild(textnode);                              // Append the text to <li>
-        node.classList.add("list-group-item");
-        node.classList.add("list-group-item-success");
+        var node = $(document.createElement("a"));
+        node.text(names[i]).addClass("list-group-item list-group-item-success");
         if(names[i] == name){
-            node.classList.add("disabled");
+            node.addClass("disabled");
         }
-        onlineUsers.appendChild(node);
+        $("#onlineUsers").append(node);
     }
-
 }
 
 //when we got an ice candidate from a remote user
@@ -208,20 +197,9 @@ function handleCandidate(candidate) {
     yourConn.addIceCandidate(new RTCIceCandidate(candidate));
 };
 
-//hang up
-hangUpBtn.addEventListener("click", function () {
-    console.log("You closed connected.");
-    send({
-        type: "leave",
-        from: name
-    });
-
-    handleLeave();
-});
-
 function handleLeave() {
     connectedUser = null;
-    remoteVideo.src = null;
+    $("#remoteVideo").attr("src", null);
 
     yourConn.close();
     yourConn.onicecandidate = null;
