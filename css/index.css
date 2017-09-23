@@ -2,3 +2,7 @@
     padding-left: 5%;
     padding-right: 5%;
 }
+
+.alert{
+    overflow-wrap: break-word;
+}
