@@ -3,7 +3,7 @@ $login = null;
 if (!empty($_SESSION["username"])) {
     $login = <<<HTML
     <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="username"}>{$_SESSION["username"]}<span class="caret"></span></a>
+        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="username"}>{$_SESSION["firstname"]}<span class="caret"></span></a>
         <ul class="dropdown-menu">
         <li><a href="/user.php">About Me</a></li>
         <li role="separator" class="divider"></li>
