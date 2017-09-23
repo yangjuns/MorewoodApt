@@ -10,16 +10,20 @@ $(document).ready(function () {
     // Add functions to btns
     $("#hangUpBtn").click(function () {
         console.log("You closed connected.");
+
         send({
             type: "leave",
             from: name
         });
         handleLeave();
     });
-    $("#callBtn").click(function () {
 
-        var callToUsername = $("#callToUsernameInput").val();
-
+    $("#input-panel").submit(function (e) {
+        console.log("submitting...");
+        var callToUsername = $(".msg-input").val();
+        $(".send-msg-btn").text("Calling ... " + callToUsername);
+        $(".msg-input").hide();
+        e.preventDefault();
         if (callToUsername.length > 0) {
 
             connectedUser = callToUsername;
@@ -102,8 +106,14 @@ function getReady(){
 
     //when a remote user adds stream to the peer connection, we display it
     yourConn.onaddstream = function (e) {
+        // Change Remote Video Size
+        setFullVideo($("#remoteVideo"));
+        setSmallVideo($("#localVideo"));
+
+        $("#remoteVideo").parent().show();
         $("#remoteVideo").attr("src", window.URL.createObjectURL(e.stream)).load();
         $("#hangUpBtn").show();
+        $("#input-panel").hide();
     };
 
     // Setup ice handling
@@ -198,11 +208,43 @@ function handleCandidate(candidate) {
 };
 
 function handleLeave() {
+    $("#hangUpBtn").hide();
+    inputRestore();
+
     connectedUser = null;
     $("#remoteVideo").attr("src", null);
+    $("#remoteVideo").parent().hide();
+
+    //restore video size
+    setFullVideo($("#localVideo"));
+    setSmallVideo($("#remoteVideo"));
 
     yourConn.close();
     yourConn.onicecandidate = null;
     yourConn.onaddstream = null;
     getReady();
 };
+
+// UI Modification
+function inputRestore() {
+    $("#input-panel").show();
+    $(".msg-input").attr("placeholder", "Who do you want to call?").show();
+    $(".send-msg-btn").text("Call");
+}
+
+function setFullVideo(jObject){
+    jObject.addClass("full-video");
+    jObject.removeClass("small-video");
+    jObject.parent().addClass("full-video-container");
+    jObject.parent().removeClass("small-video-container");
+}
+
+function setSmallVideo(jObject){
+    jObject.addClass("small-video");
+    jObject.removeClass("full-video");
+    jObject.parent().addClass("small-video-container");
+    jObject.parent().removeClass("full-video-container");
+}
+$(".navbar").css("margin-bottom","0px");
+inputRestore();
+
