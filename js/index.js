@@ -5,7 +5,7 @@ const Person = {
     YANG: {name: "Yangjun"},
     MI: {name: "HashBrownnn"},
 };
-
+var numComments = 20;
 function isValidPerson(name) {
     name = name.toLowerCase();
     for (var key in Person) {
@@ -31,7 +31,12 @@ $("#input-form").submit(function (e) {
 
 // Message Functions
 function getMsg(){
-    $("#content-container").load("/php/getMsg.php");
+    $.get("/php/getMsg.php",
+        {more: numComments},
+        function (data, status) {
+            numComments+= 20;
+            $("#content-container").html(data);
+        });
 }
 
 function sendMsg(){
@@ -90,6 +95,19 @@ function sendMail(message, names) {
         url: "/php/email.php",
     });
 }
+
+$(window).scroll(function() {
+    if($(window).scrollTop() == $(document).height() - $(window).height()) {
+        // ajax call get data from server and append to the div
+        $.get("/php/getMsg.php",
+            {more: numComments+20},
+            function (data, status) {
+                numComments+= 20;
+                $("#content-container").html(data);
+            });
+    }
+});
+
 
 // UI Functions
 function adjustContentHeight() {

@@ -5,7 +5,8 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 // arguments
-$msgLimit = 20;
+
+$msgLimit = empty($_GET["more"]) ? 20: $_GET["more"];
 
 // db parameters
 $db_server="morewood.life";
