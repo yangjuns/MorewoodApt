@@ -6,14 +6,14 @@
       $username = $_POST['username'];
       $password = $_POST['password'];
 
-      $db_server = 'yangjuns.info';
+      $db_server ="morewood.life";
       $db_user = 'root';
       $db_password = 'qweasdzxc';
       $db = new mysqli($db_server, $db_user, $db_password, 'morewoodapt');
       if($db->connect_errno > 0){
           die('Unable to connect to database [' . $db->connect_error . ']');
       }
-      $sql = "SELECT userid FROM users WHERE firstname = \"$username\" AND password = \"$password\"";
+      $sql = "SELECT userid, firstname FROM users WHERE username = \"$username\" AND password = \"$password\" and active = true";
 
       if(!$result = $db->query($sql)){
           die('There was an error running the query [' . $db->error . ']');
@@ -22,8 +22,9 @@
       if($result->num_rows == 0){
         $msg = 'Wrong username or password';
       }else{
-        $userid = $result->fetch_assoc()["userid"];
-        $_SESSION['userid'] = $userid;
+        $row = $result->fetch_assoc();
+        $_SESSION['userid'] = $row["userid"];
+        $_SESSION['firstname'] = $row["firstname"];
         $_SESSION['username'] = $_POST['username'];
         header("Location: index.php");
       }

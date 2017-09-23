@@ -21,7 +21,7 @@ if($conn->connect_errno > 0){
 }
 $conn->query("SET NAMES utf8;");
 
-$query = "SELECT commentid, time, firstname, comments FROM users AS u, comments AS c WHERE u.userid = c.userid AND c.active = 1 ORDER BY time DESC LIMIT $msgLimit";
+$query = "SELECT username, commentid, time, firstname, comments FROM users AS u, comments AS c WHERE u.userid = c.userid AND c.active = 1 ORDER BY time DESC LIMIT $msgLimit";
 $result = $conn->query($query) or die($conn->error);
 $msgs = array();
 date_default_timezone_set("US/Eastern");
@@ -54,7 +54,7 @@ function blockHTML($msgs){
         echo <<<HTML
     <div class="alert {$color} alert-dismissible" role="alert">
 HTML;
-        if(!empty($_SESSION["username"]) && ($_SESSION["username"] == $row["firstname"])){
+        if(!empty($_SESSION["username"]) && ($_SESSION["username"] == $row["username"])){
             echo <<<HTML
             <button onclick="delMsg({$row['commentid']});" type="button" class="close" aria-label="Close"><span aria-hidden="true">×</span></button>
 HTML;
