@@ -119,7 +119,7 @@ HTML;
             <!--</div>-->
     <!--</div>-->
     <!--</div>-->
-    
+    <script !src="/js/adapter.js"></script>   
     <script src = "/js/call.js"></script>
 HTML;
     }
