@@ -56,16 +56,10 @@ body {
 }
 
 .file-type-img {
-    width: 20px;
-    height:20px;
+    width: 30px;
+    height:30px;
 }
 
-.file-pic-img {
-    object-fit: cover;
-    overflow:hidden;
-    width: 100%;
-    height:100%;
-}
 
 .file-container-info-col {
     margin-left: 20px;
