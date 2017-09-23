@@ -32,21 +32,10 @@ include $_SERVER["DOCUMENT_ROOT"] . "/php/sessionStart.php";
     include $_SERVER["DOCUMENT_ROOT"] . "/components/header.php"
 	?>
 
-	<table class="sortable">
-	    <thead>
-		<tr>
-			<th>Filename</th>
-            <th>Uploader</th>
-			<th>Type</th>
-			<th>Size</th>
-			<th>Date Modified</th>
-            <th></th>
-		</tr>
-	    </thead>
-	    <tbody>
-        <?php
-    $uploadDir = $_SERVER["DOCUMENT_ROOT"] . "/uploads/";
-	// Return file size as a string
+<?php
+
+	$uploadDir = $_SERVER["DOCUMENT_ROOT"] . "/uploads/";
+
 	function pretty_filesize($file) {
 		$size=filesize($file);
 		if($size<1024){$size = $size . " Bytes";}
@@ -172,30 +161,56 @@ include $_SERVER["DOCUMENT_ROOT"] . "/php/sessionStart.php";
 
         $conn->close();
 	    // Output
-        if($username == "") $username = "Unknown";
-        echo <<<HTML
-		    <tr class='$class'>
-                <td><a href='./$namehref'$favicon class='name' download>$name</a></td>
-                <td><a href='./$namehref'>$username</td>
-                <td><a href='./$namehref'>$extn</a></td>
-                <td sorttable_customkey='$sizekey'><a href='./$namehref'>$size</a></td>
-                <td sorttable_customkey='$timekey'><a href='./$namehref'>$modtime</a></td>
-                <td>
-HTML;
-        if(!empty($_SESSION["username"])) {
-            if (($_SESSION["username"] == $username) ||
-                $username == "Unknown") {
-                echo <<<HTML
-            <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"
-                        style='color: red;' onclick='deleteFile(this);'
-            ></span>
-
-HTML;
-            }
-        }
-    echo <<<HTML
-            </td>
-		</tr>
+		if($username == "") $username = "Unknown";
+		// parse file name
+		$fileClass = "";
+		$extnSep = strrpos($name, ".");
+		if ($extnSep >= 0) {
+			$extn = substr($name, $extnSep + 1);
+		}
+		switch (strtolower($extn)) {
+			case "jpg":
+			case "jpeg":
+			case "png":
+			case "svg":
+			case "ai":
+			case "psd":
+				$fileClass = "file-pic";
+				break;
+			case "mov":
+			case "mp4":
+			case "flv":
+				$fileClass = "file-video";
+				break;
+			case "mp3":
+			case "m4a":
+			case "wav":
+			case "aac":
+				$fileClass = "file-sound";
+				break;
+		}
+		echo <<<HTML
+		    <div class="file-container">
+				<div class="file-container-left">
+					<div class="file-container-type-col {$fileClass}"></div>
+					<div class="file-container-info-col">
+						<div class="file-container-title">
+							<a href='./$namehref' class="file-title">$name</a>
+						</div>
+						<div class="file-container-meta">
+							<p class="file-meta file-uploader">$username</p>
+							<p class="file-meta file-size">$size</p>
+							<p class="file-meta file-modtime">$modtime</p>
+						</div>
+					</div>
+				</div>
+				<div class="file-container-right">
+					<a href='./$namehref' download class="file-op-btn file-download-btn">
+					    <img class="file-op-btn" src="/imgs/download.png" >
+				    </a>
+					<input type="image" class="file-op-btn file-delete-btn" src="/imgs/delete.png" onclick="deleteFile('{$name}')">
+				</div>
+			</div>
 HTML;
 	}
 	?>
@@ -206,7 +221,7 @@ HTML;
 <?php
 if(!empty($_SESSION["username"])){
 	echo <<<HTML
-	    <div id="file-container">
+	    <div id="file-upload-container">
 		    <div id="upload-progress"></div>
 		    <div id="file-panel">
 				<label id="file-upload-label" for="file-upload-input">Choose File</label>

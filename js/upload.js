@@ -41,9 +41,9 @@ function uploadFile() {
     request.send(data);
 }
 
-function deleteFile(item){
+function deleteFile(filename){
+    console.log(filename);
     //get the file
-    var filename = item.parentNode.parentNode.firstElementChild.firstElementChild.innerHTML;
     $.post("/php/deleteFile.php",
         {
             msg: filename
@@ -54,11 +54,15 @@ function deleteFile(item){
 }
 
 function adjustContentHeight() {
-    const fileContainer = document.getElementById("file-container");
+    const fileContainer = document.getElementById("file-upload-container");
     if (fileContainer) {
         const panelHeight = $(fileContainer).outerHeight();
         $(fileList).css("margin-bottom", panelHeight + 20);
     }
+    if (screen.width < 900) {
+        $(".file-modtime").remove();
+    }
 }
 
 adjustContentHeight();
+window.addEventListener("resize", adjustContentHeight);
