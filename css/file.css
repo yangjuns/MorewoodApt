@@ -35,6 +35,9 @@ body {
 }
 
 .file-container-type-col {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
     height: 70px;
     width: 100px;
     background-color: #bdbdbd;
@@ -50,6 +53,11 @@ body {
 
 .file-video {
     background-color: #EF5350;
+}
+
+.file-type-img {
+    width: 20px;
+    height: 20px;
 }
 
 .file-container-info-col {
@@ -158,5 +166,10 @@ body {
 
     .file-download-btn {
         margin-right: 20px;
+    }
+
+    .file-op-btn {
+        width: 25px;
+        height: 25px;
     }
 }

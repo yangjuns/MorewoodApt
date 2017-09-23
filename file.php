@@ -164,6 +164,7 @@ include $_SERVER["DOCUMENT_ROOT"] . "/php/sessionStart.php";
 		if($username == "") $username = "Unknown";
 		// parse file name
 		$fileClass = "";
+		$typeImgPath = "/imgs/file.png";
 		$extnSep = strrpos($name, ".");
 		if ($extnSep >= 0) {
 			$extn = substr($name, $extnSep + 1);
@@ -176,23 +177,28 @@ include $_SERVER["DOCUMENT_ROOT"] . "/php/sessionStart.php";
 			case "ai":
 			case "psd":
 				$fileClass = "file-pic";
+				$typeImgPath = "/imgs/image.png";
 				break;
 			case "mov":
 			case "mp4":
 			case "flv":
 				$fileClass = "file-video";
+				$typeImgPath = "/imgs/video.png";
 				break;
 			case "mp3":
 			case "m4a":
 			case "wav":
 			case "aac":
 				$fileClass = "file-sound";
+				$typeImgPath = "/imgs/music.png";
 				break;
 		}
 		echo <<<HTML
 		    <div class="file-container">
 				<div class="file-container-left">
-					<div class="file-container-type-col {$fileClass}"></div>
+					<div class="file-container-type-col {$fileClass}">
+						<img class="file-type-img" src="{$typeImgPath}">
+					</div>
 					<div class="file-container-info-col">
 						<div class="file-container-title">
 							<a href='./$namehref' class="file-title">$name</a>

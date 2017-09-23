@@ -61,6 +61,7 @@ function adjustContentHeight() {
     }
     if (screen.width < 900) {
         $(".file-modtime").remove();
+        $(".file-type-img").remove();
     }
 }
 
