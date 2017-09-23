@@ -160,7 +160,10 @@ include $_SERVER["DOCUMENT_ROOT"] . "/php/sessionStart.php";
 
         $conn->close();
 	    // Output
-		if($username == "") $username = "Unknown";
+		if($username == ""){
+            $firstname = "Unknown";
+            $username = "Unknown";
+        };
 		// parse file name
 		$fileClass = "";
 		$typeImgPath = "/imgs/file.png";
@@ -213,7 +216,7 @@ include $_SERVER["DOCUMENT_ROOT"] . "/php/sessionStart.php";
 HTML;
 		if(!empty($_SESSION["username"])) {
 			if (($_SESSION["username"] == $username) ||
-			     $username == "Unknown") {
+			     $firstname == "Unknown") {
 					 echo <<<HTML
 					 <input type="image" class="file-op-btn file-delete-btn" src="/imgs/delete.png" onclick="deleteFile('{$name}')">
 HTML;
