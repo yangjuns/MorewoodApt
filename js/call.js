@@ -96,7 +96,7 @@ $(document).ready(function () {
 function getReady(){
     //using Google public stun server
     var configuration = {
-        "iceServers": [{ "url": "stun:stun2.1.google.com:19302" }]
+        "iceServers": [{ "urls": "stun:stun2.1.google.com:19302" }]
     };
 
     yourConn = new RTCPeerConnection(configuration);
@@ -153,12 +153,13 @@ function handleLogin(success) {
         //getting local video stream
         navigator.getUserMedia = navigator.getUserMedia ||
             navigator.webkitGetUserMedia ||
+            navigator.mediaDevices.getUserMedia ||
             navigator.mozGetUserMedia;
         navigator.getUserMedia({ video: true, audio: true }, function (myStream) {
             stream = myStream;
 
             //displaying local video stream on the page
-            $("#localVideo").attr("src", window.URL.createObjectURL(stream)).load();
+            $("#localVideo").get(0).srcObject = stream;
 
             getReady();
         }, function (error) {
