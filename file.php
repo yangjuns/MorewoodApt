@@ -79,7 +79,7 @@ include $_SERVER["DOCUMENT_ROOT"] . "/php/sessionStart.php";
 
 	    // Gets File Display Names
 		$name= $dirArray[$index];
-		$namehref=$dirArray[$index];
+		$namehref= "uploads/".$dirArray[$index];
 
 	    // Gets Date Modified
 		$modtime=date("M j Y g:i A", filemtime($_SERVER["DOCUMENT_ROOT"]. "/uploads/" . $dirArray[$index]));
