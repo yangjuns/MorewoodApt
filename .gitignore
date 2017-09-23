@@ -7,3 +7,6 @@ test.php
 .idea/
 deploy.sh
 uploads/*
+
+# assets
+assets/

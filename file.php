@@ -211,10 +211,23 @@ include $_SERVER["DOCUMENT_ROOT"] . "/php/sessionStart.php";
 					</div>
 				</div>
 				<div class="file-container-right">
+HTML;
+		if(!empty($_SESSION["username"])) {
+			if (($_SESSION["username"] == $username) ||
+			     $username == "Unknown") {
+					 echo <<<HTML
+					 <input type="image" class="file-op-btn file-delete-btn" src="/imgs/delete.png" onclick="deleteFile('{$name}')">
+HTML;
+			}
+		} else {
+			echo <<<HTML
+			<input type="image" class="file-op-btn file-delete-btn" src="/imgs/delete.png" onclick="deleteFile('{$name}')" hidden>
+HTML;
+		}
+		echo <<<HTML
 					<a href='./$namehref' download class="file-op-btn file-download-btn">
 					    <img class="file-op-btn" src="/imgs/download.png" >
-				    </a>
-					<input type="image" class="file-op-btn file-delete-btn" src="/imgs/delete.png" onclick="deleteFile('{$name}')">
+					</a>
 				</div>
 			</div>
 HTML;
