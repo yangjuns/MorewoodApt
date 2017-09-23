@@ -29,6 +29,7 @@ $stmt = $conn->prepare("INSERT INTO comments (userid, comments) VALUES (?, ?)");
 $stmt->bind_param("is", $userId, $msg);
 // set parameters and execute
 $stmt->execute();
+$stmt->close();
 $conn->close();
 
 ?>
