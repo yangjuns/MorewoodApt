@@ -145,14 +145,13 @@ include $_SERVER["DOCUMENT_ROOT"] . "/php/sessionStart.php";
         }
         $conn->query("SET NAMES utf8;");
         // prepare and bind
-        $stmt = $conn->prepare("SELECT firstname FROM files, users WHERE files.userid = users.userid AND filename = ?");
+        $stmt = $conn->prepare("SELECT username,firstname FROM files, users WHERE files.userid = users.userid AND filename = ?");
         $stmt->bind_param("s", $name);
         /* execute query */
         $stmt->execute();
 
         /* bind result variables */
-        $stmt->bind_result($username);
-
+        $stmt->bind_result($username, $firstname);
         /* fetch value */
         $stmt->fetch();
 
@@ -177,7 +176,7 @@ include $_SERVER["DOCUMENT_ROOT"] . "/php/sessionStart.php";
 			case "ai":
 			case "psd":
 				$fileClass = "file-pic";
-				$typeImgPath = "/imgs/image.png";
+				$typeImgPath = "./$namehref";
 				break;
 			case "mov":
 			case "mp4":
@@ -197,14 +196,14 @@ include $_SERVER["DOCUMENT_ROOT"] . "/php/sessionStart.php";
 		    <div class="file-container">
 				<div class="file-container-left">
 					<div class="file-container-type-col {$fileClass}">
-						<img class="file-type-img" src="{$typeImgPath}">
+						<img class="file-type-img {$fileClass}-img" src="{$typeImgPath}">
 					</div>
 					<div class="file-container-info-col">
 						<div class="file-container-title">
 							<a href='./$namehref' class="file-title">$name</a>
 						</div>
 						<div class="file-container-meta">
-							<p class="file-meta file-uploader">$username</p>
+							<p class="file-meta file-uploader">$firstname</p>
 							<p class="file-meta file-size">$size</p>
 							<p class="file-meta file-modtime">$modtime</p>
 						</div>
