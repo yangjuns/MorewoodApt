@@ -151,6 +151,9 @@ function handleLogin(success) {
         send({type:"query", from:name});
 
         //getting local video stream
+        navigator.getUserMedia = navigator.getUserMedia ||
+            navigator.webkitGetUserMedia ||
+            navigator.mozGetUserMedia;
         navigator.getUserMedia({ video: true, audio: true }, function (myStream) {
             stream = myStream;
 
