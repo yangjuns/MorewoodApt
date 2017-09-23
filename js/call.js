@@ -111,7 +111,7 @@ function getReady(){
         setSmallVideo($("#localVideo"));
 
         $("#remoteVideo").parent().show();
-        $("#remoteVideo").attr("src", window.URL.createObjectURL(e.stream)).load();
+        $("#remoteVideo").get(0).srcObject = e.stream;
         $("#hangUpBtn").show();
         $("#input-panel").hide();
     };
