@@ -34,7 +34,6 @@ function getMsg(){
     $.get("/php/getMsg.php",
         {more: numComments},
         function (data, status) {
-            numComments+= 20;
             $("#content-container").html(data);
         });
 }
